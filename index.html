@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZATCA Phase 2 E-Invoicing — Saudi Arabia</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* ==================== LOGIN ==================== */
+.login-page {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card h3 { font-weight: 700; color: #1e3c72; margin-bottom: 5px; }
+.login-card .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 30px; }
+.login-card .form-control { border-radius: 8px; padding: 12px 16px; border: 2px solid #e0e0e0; }
+.login-card .form-control:focus { border-color: #2a5298; box-shadow: 0 0 0 0.2rem rgba(42,82,152,0.15); }
+.login-card .btn-primary {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border: none; border-radius: 8px; padding: 12px; font-weight: 600;
+}
+
+/* ==================== LAYOUT ==================== */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    padding: 20px 0;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    overflow-y: auto;
+}
+
+.sidebar .brand {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 15px;
+}
+
+.sidebar .brand h4 { margin: 0; font-weight: 700; color: #fff; }
+.sidebar .brand small { color: rgba(255,255,255,0.7); font-size: 0.75rem; }
+
+.sidebar .nav-link {
+    color: rgba(255,255,255,0.85);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-size: 0.92rem;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+
+.sidebar .nav-link.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-left-color: #38ef7d;
+    font-weight: 600;
+}
+
+.sidebar .nav-link i { font-size: 1.1rem; }
+
+/* Main content */
+.main-content {
+    margin-left: 260px;
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    background: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar h5 { margin: 0; color: #1e3c72; font-weight: 600; }
+.topbar .user-info { color: #666; font-size: 0.9rem; }
+
+.page-body { padding: 30px; }
+
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+/* Stat cards */
+.stat-card {
+    border: none;
+    border-radius: 12px;
+    padding: 22px;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    height: 100%;
+}
+
+.stat-card .stat-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+
+.stat-card .stat-value {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-primary { background: linear-gradient(135deg, #667eea, #764ba2); }
+.stat-success { background: linear-gradient(135deg, #11998e, #38ef7d); }
+.stat-info    { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
+.stat-warning { background: linear-gradient(135deg, #f2994a, #f2c94c); }
+.stat-danger  { background: linear-gradient(135deg, #eb3349, #f45c43); }
+.stat-dark    { background: linear-gradient(135deg, #232526, #414345); }
+
+/* Card */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 16px 20px;
+    font-weight: 600;
+    color: #1e3c72;
+    border-radius: 12px 12px 0 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body { padding: 20px; }
+
+/* Table */
+.table thead th {
+    background: #f4f6fb;
+    color: #1e3c72;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table td { vertical-align: middle; font-size: 0.9rem; }
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border: none;
+}
+.btn-primary:hover { background: linear-gradient(135deg, #16305e, #234a8a); }
+
+.btn-sm { padding: 4px 10px; font-size: 0.8rem; }
+
+/* Alerts */
+.alert-custom {
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    display: none;
+}
+.alert-custom.show { display: block; }
+.alert-error { background: #fdecea; color: #c0392b; border-left: 4px solid #e74c3c; }
+.alert-success { background: #e8f8f0; color: #1e8449; border-left: 4px solid #27ae60; }
+.alert-info { background: #e8f4fd; color: #1a5276; border-left: 4px solid #3498db; }
+
+/* Status badges */
+.badge-draft { background: #95a5a6; }
+.badge-generated { background: #3498db; }
+.badge-cleared { background: #27ae60; }
+.badge-reported { background: #16a085; }
+.badge-rejected { background: #e74c3c; }
+.badge-failed { background: #c0392b; }
+.badge-pending { background: #f39c12; }
+
+.hidden { display: none !important; }
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+.empty-state i { font-size: 3rem; opacity: 0.4; }
+
+.modal-content { border-radius: 12px; border: none; }
+.modal-header { background: #f4f6fb; border-radius: 12px 12px 0 0; }
+
+.invoice-total-row {
+    background: #f4f6fb;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.3s; z-index: 1000; }
+    .sidebar.open { transform: translateX(0); }
+    .main-content { margin-left: 0; }
+    .page-body { padding: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ==================== LOGIN PAGE ==================== -->
+<div id="loginPage" class="login-page">
+    <div>
+        <div class="login-card">
+            <h3>ZATCA E-Invoicing</h3>
+            <p class="subtitle">Phase 2 Integration — Saudi Arabia</p>
+
+            <div id="loginAlert" class="alert-custom alert-error"></div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Username</label>
+                    <input type="text" class="form-control" id="username" value="admin" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control" id="password" value="Admin@123" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <div style="margin-top:20px; font-size:0.8rem; color:#888; text-align:center;">
+                Demo: <strong>admin</strong> / <strong>Admin@123</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ==================== MAIN APP ==================== -->
+<div id="appPage" class="app-layout hidden">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <h4><i class="bi bi-receipt-cutoff"></i> ZATCA</h4>
+            <small>Phase 2 E-Invoicing</small>
+        </div>
+
+        <nav class="nav flex-column">
+            <a class="nav-link active" onclick="switchPage('dashboard', this)">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+            <a class="nav-link" onclick="switchPage('company', this)">
+                <i class="bi bi-building"></i> Company Profile
+            </a>
+            <a class="nav-link" onclick="switchPage('customers', this)">
+                <i class="bi bi-people"></i> Customers
+            </a>
+            <a class="nav-link" onclick="switchPage('products', this)">
+                <i class="bi bi-box-seam"></i> Products / Services
+            </a>
+            <a class="nav-link" onclick="switchPage('invoices', this)">
+                <i class="bi bi-file-earmark-text"></i> Invoices
+            </a>
+            <a class="nav-link" onclick="switchPage('zatca', this)">
+                <i class="bi bi-shield-lock"></i> ZATCA Settings
+            </a>
+            <a class="nav-link" onclick="switchPage('logs', this)">
+                <i class="bi bi-journal-text"></i> Logs
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-content">
+
+        <div class="topbar">
+            <button class="btn btn-sm btn-outline-secondary d-md-none" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            <h5 id="pageTitle">Dashboard</h5>
+            <div class="d-flex align-items-center gap-3">
+                <span class="user-info"><i class="bi bi-person-circle"></i> <span id="navUsername">admin</span></span>
+                <button onclick="showChangePassword()" class="btn btn-sm btn-outline-primary">Change Password</button>
+                <button onclick="handleLogout()" class="btn btn-sm btn-outline-danger">Logout</button>
+            </div>
+        </div>
+
+        <div class="page-body">
+
+            <!-- ==================== DASHBOARD ==================== -->
+            <section id="page-dashboard" class="page-section active">
+                <div class="row g-3">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-primary">
+                            <div class="stat-label">Total Invoices</div>
+                            <p class="stat-value" id="statTotal">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-success">
+                            <div class="stat-label">Cleared</div>
+                            <p class="stat-value" id="statCleared">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-info">
+                            <div class="stat-label">Reported</div>
+                            <p class="stat-value" id="statReported">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-warning">
+                            <div class="stat-label">Pending</div>
+                            <p class="stat-value" id="statPending">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-danger">
+                            <div class="stat-label">Rejected</div>
+                            <p class="stat-value" id="statRejected">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-dark">
+                            <div class="stat-label">Total Sales (SAR)</div>
+                            <p class="stat-value" id="statSales">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-primary">
+                            <div class="stat-label">Total VAT (SAR)</div>
+                            <p class="stat-value" id="statVat">0</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stat-card stat-info">
+                            <div class="stat-label">Customers</div>
+                            <p class="stat-value" id="statCustomers">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== COMPANY ==================== -->
+            <section id="page-company" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-building"></i> Company / Seller Profile</span>
+                        <button class="btn btn-sm btn-primary" onclick="saveCompany()">
+                            <i class="bi bi-save"></i> Save
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="companyAlert" class="alert-custom"></div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Legal Business Name (English) *</label>
+                                <input type="text" class="form-control" id="cLegalEn" placeholder="e.g. Al Noor Trading Co.">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Legal Business Name (Arabic) *</label>
+                                <input type="text" class="form-control" id="cLegalAr" placeholder="مثال: شركة النور التجارية" dir="rtl">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">VAT Registration Number *</label>
+                                <input type="text" class="form-control" id="cVat" placeholder="3XXXXXXXXXXXXXX" maxlength="15">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Commercial Registration Number</label>
+                                <input type="text" class="form-control" id="cCrn" placeholder="1010XXXXXX">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Building Number</label>
+                                <input type="text" class="form-control" id="cBuilding" placeholder="1234" maxlength="4">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Street Name</label>
+                                <input type="text" class="form-control" id="cStreet" placeholder="King Fahd Road">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">District</label>
+                                <input type="text" class="form-control" id="cDistrict" placeholder="Al Olaya">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" id="cCity" placeholder="Riyadh">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Postal Code</label>
+                                <input type="text" class="form-control" id="cPostal" placeholder="12345" maxlength="5">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Additional Number</label>
+                                <input type="text" class="form-control" id="cAdditional" placeholder="5678" maxlength="4">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Country Code</label>
+                                <input type="text" class="form-control" id="cCountry" value="SA" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Industry</label>
+                                <input type="text" class="form-control" id="cIndustry" placeholder="Retail">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Contact Phone</label>
+                                <input type="text" class="form-control" id="cPhone" placeholder="+966 11 123 4567">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Contact Email</label>
+                                <input type="email" class="form-control" id="cEmail" placeholder="info@company.sa">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== CUSTOMERS ==================== -->
+            <section id="page-customers" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-people"></i> Customers</span>
+                        <button class="btn btn-sm btn-primary" onclick="openCustomerModal()">
+                            <i class="bi bi-plus-lg"></i> Add Customer
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="customerAlert" class="alert-custom"></div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name (EN)</th>
+                                        <th>Name (AR)</th>
+                                        <th>VAT Number</th>
+                                        <th>City</th>
+                                        <th>Type</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customersTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="customersEmpty" class="empty-state">
+                            <i class="bi bi-people"></i>
+                            <p>No customers yet. Click "Add Customer" to start.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PRODUCTS ==================== -->
+            <section id="page-products" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-box-seam"></i> Products / Services</span>
+                        <button class="btn btn-sm btn-primary" onclick="openProductModal()">
+                            <i class="bi bi-plus-lg"></i> Add Product
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="productAlert" class="alert-custom"></div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name (EN)</th>
+                                        <th>SKU</th>
+                                        <th>Unit</th>
+                                        <th>Unit Price</th>
+                                        <th>VAT %</th>
+                                        <th>Category</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productsTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="productsEmpty" class="empty-state">
+                            <i class="bi bi-box-seam"></i>
+                            <p>No products yet. Click "Add Product" to start.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== INVOICES ==================== -->
+            <section id="page-invoices" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-file-earmark-text"></i> Invoices</span>
+                        <button class="btn btn-sm btn-primary" onclick="openInvoiceModal()">
+                            <i class="bi bi-plus-lg"></i> Create Invoice
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="invoiceAlert" class="alert-custom"></div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice #</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Total (SAR)</th>
+                                        <th>VAT (SAR)</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoicesTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="invoicesEmpty" class="empty-state">
+                            <i class="bi bi-file-earmark-text"></i>
+                            <p>No invoices yet. Click "Create Invoice" to start.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== ZATCA SETTINGS ==================== -->
+            <section id="page-zatca" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-shield-lock"></i> ZATCA Configuration</span>
+                        <button class="btn btn-sm btn-primary" onclick="saveZatca()">
+                            <i class="bi bi-save"></i> Save
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="zatcaAlert" class="alert-custom"></div>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Onboarding required:</strong> You must obtain CSID from ZATCA Fatoora Portal before submitting invoices.
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Environment</label>
+                                <select class="form-select" id="zEnv">
+                                    <option value="sandbox">Sandbox (Testing)</option>
+                                    <option value="simulation">Simulation</option>
+                                    <option value="production">Production (Live)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">EGS UUID</label>
+                                <input type="text" class="form-control" id="zEgsUuid" placeholder="Auto-generated">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">VAT Number</label>
+                                <input type="text" class="form-control" id="zVat" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">CSID Status</label>
+                                <input type="text" class="form-control" id="zCsid" value="Not Configured" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Compliance CSID</label>
+                                <input type="text" class="form-control" id="zCompliance" placeholder="Paste CCSID here">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Compliance Secret</label>
+                                <input type="password" class="form-control" id="zSecret" placeholder="Paste secret here">
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h6 class="text-muted">Onboarding Steps:</h6>
+                        <ol class="small text-muted">
+                            <li>Create taxpayer account on ZATCA Fatoora Portal</li>
+                            <li>Generate CSR (Certificate Signing Request)</li>
+                            <li>Obtain OTP from portal</li>
+                            <li>Submit CSR + OTP to get Compliance CSID</li>
+                            <li>Run 6 compliance checks (Standard + Simplified invoice, credit note, debit note)</li>
+                            <li>Obtain Production CSID</li>
+                            <li>Start submitting real invoices</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== LOGS ==================== -->
+            <section id="page-logs" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-journal-text"></i> Audit Logs</span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="clearLogs()">
+                            <i class="bi bi-trash"></i> Clear
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>User</th>
+                                        <th>Action</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logsTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="logsEmpty" class="empty-state">
+                            <i class="bi bi-journal-text"></i>
+                            <p>No activity yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- ==================== CUSTOMER MODAL ==================== -->
+<div class="modal fade" id="customerModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Customer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="custId">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Name (English) *</label>
+                        <input type="text" class="form-control" id="custNameEn">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Name (Arabic)</label>
+                        <input type="text" class="form-control" id="custNameAr" dir="rtl">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">VAT Number</label>
+                        <input type="text" class="form-control" id="custVat" maxlength="15">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">CRN</label>
+                        <input type="text" class="form-control" id="custCrn">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Building #</label>
+                        <input type="text" class="form-control" id="custBuilding" maxlength="4">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Street</label>
+                        <input type="text" class="form-control" id="custStreet">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">District</label>
+                        <input type="text" class="form-control" id="custDistrict">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-control" id="custCity">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Postal Code</label>
+                        <input type="text" class="form-control" id="custPostal" maxlength="5">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Country</label>
+                        <input type="text" class="form-control" id="custCountry" value="SA">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="custEmail">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="custPhone">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="custVatReg">
+                            <label class="form-check-label" for="custVatReg">VAT Registered Customer</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="saveCustomer()">Save Customer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PRODUCT MODAL ==================== -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Product / Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="prodId">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Name (English) *</label>
+                        <input type="text" class="form-control" id="prodNameEn">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Name (Arabic)</label>
+                        <input type="text" class="form-control" id="prodNameAr" dir="rtl">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">SKU</label>
+                        <input type="text" class="form-control" id="prodSku">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Unit</label>
+                        <select class="form-select" id="prodUnit">
+                            <option value="PCE">Piece (PCE)</option>
+                            <option value="KG">Kilogram (KG)</option>
+                            <option value="MTR">Meter (MTR)</option>
+                            <option value="LTR">Liter (LTR)</option>
+                            <option value="BOX">Box (BOX)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Unit Price (SAR) *</label>
+                        <input type="number" step="0.01" class="form-control" id="prodPrice" value="0.00">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">VAT Category</label>
+                        <select class="form-select" id="prodCategory" onchange="onVatCategoryChange()">
+                            <option value="S">Standard (15%)</option>
+                            <option value="Z">Zero Rated (0%)</option>
+                            <option value="E">Exempt</option>
+                            <option value="O">Out of Scope</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">VAT Rate (%)</label>
+                        <input type="number" step="0.01" class="form-control" id="prodVat" value="15.00">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="prodDesc" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== INVOICE MODAL ==================== -->
+<div class="modal fade" id="invoiceModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Invoice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Invoice Type *</label>
+                        <select class="form-select" id="invType">
+                            <option value="standard">Standard Tax Invoice (B2B)</option>
+                            <option value="simplified">Simplified Tax Invoice (B2C)</option>
+                            <option value="credit_note">Credit Note</option>
+                            <option value="debit_note">Debit Note</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Invoice Number</label>
+                        <input type="text" class="form-control" id="invNumber" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Issue Date</label>
+                        <input type="date" class="form-control" id="invDate">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Currency</label>
+                        <input type="text" class="form-control" id="invCurrency" value="SAR" readonly>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Customer *</label>
+                        <select class="form-select" id="invCustomer"></select>
+                    </div>
+                </div>
+
+                <h6 class="text-muted">Line Items</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th style="width:30%">Description</th>
+                                <th style="width:10%">Qty</th>
+                                <th style="width:10%">Unit</th>
+                                <th style="width:12%">Unit Price</th>
+                                <th style="width:10%">Discount</th>
+                                <th style="width:10%">VAT %</th>
+                                <th style="width:12%">Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="invItemsBody"></tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-primary" onclick="addInvoiceLine()">
+                    <i class="bi bi-plus"></i> Add Line
+                </button>
+
+                <hr>
+
+                <div class="row justify-content-end">
+                    <div class="col-md-5">
+                        <table class="table table-sm">
+                            <tr><td>Subtotal (excl. VAT)</td><td class="text-end" id="invSubtotal">0.00</td></tr>
+                            <tr><td>Total VAT</td><td class="text-end" id="invVatTotal">0.00</td></tr>
+                            <tr class="invoice-total-row"><td>Total (incl. VAT)</td><td class="text-end" id="invGrandTotal">0.00</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="saveInvoice()">Save Invoice</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== CHANGE PASSWORD MODAL ==================== -->
+<div class="modal fade" id="pwModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="pwModalAlert" class="alert-custom"></div>
+                <div class="mb-3">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" class="form-control" id="pwCurrent">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">New Password</label>
+                    <input type="password" class="form-control" id="pwNew" minlength="8">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-control" id="pwConfirm">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" onclick="savePassword()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ============================================================
+   ZATCA PHASE 2 — STANDALONE DEMO
+   All data persisted in localStorage.
+   Default login: admin / Admin@123
+   ============================================================ */
+
+const DEFAULT_USER = 'admin';
+const DEFAULT_PASS = 'Admin@123';
+
+let customerModal, productModal, invoiceModal, pwModal;
+let editingInvoiceLines = [];
+
+// ==================== STORAGE ====================
+const DB = {
+    get(key, fallback) {
+        try { return JSON.parse(localStorage.getItem('zatca_' + key)) ?? fallback; }
+        catch { return fallback; }
+    },
+    set(key, val) { localStorage.setItem('zatca_' + key, JSON.stringify(val)); },
+    del(key) { localStorage.removeItem('zatca_' + key); }
+};
+
+function getUsers() {
+    let u = DB.get('users', null);
+    if (!u) { u = { [DEFAULT_USER]: DEFAULT_PASS }; DB.set('users', u); }
+    return u;
+}
+function saveUsers(u) { DB.set('users', u); }
+function getSession() { return DB.get('session', null); }
+function setSession(username) { DB.set('session', username); }
+function clearSession() { DB.del('session'); }
+
+function logAction(action, details = '') {
+    const logs = DB.get('logs', []);
+    logs.unshift({
+        time: new Date().toLocaleString(),
+        user: getSession() || 'system',
+        action,
+        details
+    });
+    DB.set('logs', logs.slice(0, 200));
+    if (document.getElementById('logsTable')) renderLogs();
+}
+
+// ==================== AUTH ====================
+function handleLogin(e) {
+    e.preventDefault();
+    const alertEl = document.getElementById('loginAlert');
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    const users = getUsers();
+    if (users[username] && users[username] === password) {
+        setSession(username);
+        logAction('LOGIN', 'Successful login');
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('appPage').classList.remove('hidden');
+        document.getElementById('navUsername').textContent = username;
+        refreshAll();
+    } else {
+        alertEl.textContent = 'Invalid username or password.';
+        alertEl.className = 'alert-custom alert-error show';
+    }
+}
+
+function handleLogout() {
+    logAction('LOGOUT', 'User logged out');
+    clearSession();
+    document.getElementById('appPage').classList.add('hidden');
+    document.getElementById('loginPage').classList.remove('hidden');
+    document.getElementById('password').value = DEFAULT_PASS;
+}
+
+function showChangePassword() {
+    document.getElementById('pwCurrent').value = '';
+    document.getElementById('pwNew').value = '';
+    document.getElementById('pwConfirm').value = '';
+    document.getElementById('pwModalAlert').className = 'alert-custom';
+    pwModal.show();
+}
+
+function savePassword() {
+    const alertEl = document.getElementById('pwModalAlert');
+    const cur = document.getElementById('pwCurrent').value;
+    const nw = document.getElementById('pwNew').value;
+    const cf = document.getElementById('pwConfirm').value;
+    const user = getSession();
+    const users = getUsers();
+
+    if (users[user] !== cur) {
+        alertEl.textContent = 'Current password is incorrect.';
+        alertEl.className = 'alert-custom alert-error show';
+        return;
+    }
+    if (nw.length < 8) {
+        alertEl.textContent = 'Password must be at least 8 characters.';
+        alertEl.className = 'alert-custom alert-error show';
+        return;
+    }
+    if (nw !== cf) {
+        alertEl.textContent = 'New passwords do not match.';
+        alertEl.className = 'alert-custom alert-error show';
+        return;
+    }
+
+    users[user] = nw;
+    saveUsers(users);
+    logAction('PASSWORD_CHANGED', 'Password changed');
+    alertEl.textContent = 'Password changed successfully.';
+    alertEl.className = 'alert-custom alert-success show';
+    setTimeout(() => pwModal.hide(), 1200);
+}
+
+// ==================== NAV ====================
+function switchPage(page, el) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+
+    document.querySelectorAll('.sidebar .nav-link').forEach(a => a.classList.remove('active'));
+    if (el) el.classList.add('active');
+
+    const titles = {
+        dashboard: 'Dashboard',
+        company: 'Company Profile',
+        customers: 'Customers',
+        products: 'Products / Services',
+        invoices: 'Invoices',
+        zatca: 'ZATCA Settings',
+        logs: 'Audit Logs'
+    };
+    document.getElementById('pageTitle').textContent = titles[page] || page;
+
+    if (page === 'customers') renderCustomers();
+    if (page === 'products') renderProducts();
+    if (page === 'invoices') renderInvoices();
+    if (page === 'logs') renderLogs();
+    if (page === 'company') loadCompany();
+    if (page === 'zatca') loadZatca();
+}
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ==================== DASHBOARD ====================
+function refreshDashboard() {
+    const invoices = DB.get('invoices', []);
+    const customers = DB.get('customers', []);
+
+    let cleared = 0, reported = 0, pending = 0, rejected = 0, failed = 0;
+    let totalSales = 0, totalVat = 0;
+
+    invoices.forEach(i => {
+        if (i.status === 'cleared') cleared++;
+        else if (i.status === 'reported') reported++;
+        else if (i.status === 'draft' || i.status === 'pending') pending++;
+        else if (i.status === 'rejected') rejected++;
+        else if (i.status === 'failed') failed++;
+
+        totalSales += Number(i.total || 0);
+        totalVat += Number(i.vat || 0);
+    });
+
+    document.getElementById('statTotal').textContent = invoices.length;
+    document.getElementById('statCleared').textContent = cleared;
+    document.getElementById('statReported').textContent = reported;
+    document.getElementById('statPending').textContent = pending;
+    document.getElementById('statRejected').textContent = rejected;
+    document.getElementById('statSales').textContent = totalSales.toFixed(2);
+    document.getElementById('statVat').textContent = totalVat.toFixed(2);
+    document.getElementById('statCustomers').textContent = customers.length;
+}
+
+// ==================== COMPANY ====================
+function loadCompany() {
+    const c = DB.get('company', {});
+    document.getElementById('cLegalEn').value = c.legalEn || '';
+    document.getElementById('cLegalAr').value = c.legalAr || '';
+    document.getElementById('cVat').value = c.vat || '';
+    document.getElementById('cCrn').value = c.crn || '';
+    document.getElementById('cBuilding').value = c.building || '';
+    document.getElementById('cStreet').value = c.street || '';
+    document.getElementById('cDistrict').value = c.district || '';
+    document.getElementById('cCity').value = c.city || '';
+    document.getElementById('cPostal').value = c.postal || '';
+    document.getElementById('cAdditional').value = c.additional || '';
+    document.getElementById('cCountry').value = c.country || 'SA';
+    document.getElementById('cIndustry').value = c.industry || '';
+    document.getElementById('cPhone').value = c.phone || '';
+    document.getElementById('cEmail').value = c.email || '';
+}
+
+function saveCompany() {
+    const alertEl = document.getElementById('companyAlert');
+    const data = {
+        legalEn: document.getElementById('cLegalEn').value.trim(),
+        legalAr: document.getElementById('cLegalAr').value.trim(),
+        vat: document.getElementById('cVat').value.trim(),
+        crn: document.getElementById('cCrn').value.trim(),
+        building: document.getElementById('cBuilding').value.trim(),
+        street: document.getElementById('cStreet').value.trim(),
+        district: document.getElementById('cDistrict').value.trim(),
+        city: document.getElementById('cCity').value.trim(),
+        postal: document.getElementById('cPostal').value.trim(),
+        additional: document.getElementById('cAdditional').value.trim(),
+        country: document.getElementById('cCountry').value.trim(),
+        industry: document.getElementById('cIndustry').value.trim(),
+        phone: document.getElementById('cPhone').value.trim(),
+        email: document.getElementById('cEmail').value.trim()
+    };
+
+    if (!data.legalEn || !data.legalAr || !data.vat) {
+        alertEl.textContent = 'Legal names (EN/AR) and VAT number are required.';
+        alertEl.className = 'alert-custom alert-error show';
+        return;
+    }
+
+    DB.set('company', data);
+    logAction('COMPANY_SAVED', data.legalEn);
+    alertEl.textContent = 'Company profile saved successfully.';
+    alertEl.className = 'alert-custom alert-success show';
+    setTimeout(() => alertEl.className = 'alert-custom', 3000);
+}
+
+// ==================== CUSTOMERS ====================
+function renderCustomers() {
+    const list = DB.get('customers', []);
+    const tbody = document.getElementById('customersTable');
+    const empty = document.getElementById('customersEmpty');
+
+    if (list.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = list.map((c, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${esc(c.nameEn)}</td>
+            <td dir="rtl">${esc(c.nameAr || '-')}</td>
+            <td>${esc(c.vat || '-')}</td>
+            <td>${esc(c.city || '-')}</td>
+            <td>${c.vatReg ? '<span class="badge bg-success">VAT</span>' : '<span class="badge bg-secondary">Non-VAT</span>'}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="editCustomer(${i})"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteCustomer(${i})"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openCustomerModal() {
+    document.getElementById('custId').value = '';
+    ['custNameEn','custNameAr','custVat','custCrn','custBuilding','custStreet',
+     'custDistrict','custCity','custPostal','custEmail','custPhone'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+    document.getElementById('custCountry').value = 'SA';
+    document.getElementById('custVatReg').checked = false;
+    customerModal.show();
+}
+
+function editCustomer(idx) {
+    const c = DB.get('customers', [])[idx];
+    if (!c) return;
+    document.getElementById('custId').value = idx;
+    document.getElementById('custNameEn').value = c.nameEn || '';
+    document.getElementById('custNameAr').value = c.nameAr || '';
+    document.getElementById('custVat').value = c.vat || '';
+    document.getElementById('custCrn').value = c.crn || '';
+    document.getElementById('custBuilding').value = c.building || '';
+    document.getElementById('custStreet').value = c.street || '';
+    document.getElementById('custDistrict').value = c.district || '';
+    document.getElementById('custCity').value = c.city || '';
+    document.getElementById('custPostal').value = c.postal || '';
+    document.getElementById('custCountry').value = c.country || 'SA';
+    document.getElementById('custEmail').value = c.email || '';
+    document.getElementById('custPhone').value = c.phone || '';
+    document.getElementById('custVatReg').checked = !!c.vatReg;
+    customerModal.show();
+}
+
+function saveCustomer() {
+    const nameEn = document.getElementById('custNameEn').value.trim();
+    const vatReg = document.getElementById('custVatReg').checked;
+    const vat = document.getElementById('custVat').value.trim();
+
+    if (!nameEn) { alert('Name is required.'); return; }
+    if (vatReg && !vat) { alert('VAT number is required for VAT-registered customers.'); return; }
+
+    const data = {
+        nameEn,
+        nameAr: document.getElementById('custNameAr').value.trim(),
+        vat,
+        crn: document.getElementById('custCrn').value.trim(),
+        building: document.getElementById('custBuilding').value.trim(),
+        street: document.getElementById('custStreet').value.trim(),
+        district: document.getElementById('custDistrict').value.trim(),
+        city: document.getElementById('custCity').value.trim(),
+        postal: document.getElementById('custPostal').value.trim(),
+        country: document.getElementById('custCountry').value.trim() || 'SA',
+        email: document.getElementById('custEmail').value.trim(),
+        phone: document.getElementById('custPhone').value.trim(),
+        vatReg
+    };
+
+    const list = DB.get('customers', []);
+    const idx = document.getElementById('custId').value;
+
+    if (idx === '') {
+        list.push(data);
+        logAction('CUSTOMER_ADDED', data.nameEn);
+    } else {
+        list[Number(idx)] = data;
+        logAction('CUSTOMER_UPDATED', data.nameEn);
+    }
+    DB.set('customers', list);
+    customerModal.hide();
+    renderCustomers();
+    refreshDashboard();
+}
+
+function deleteCustomer(idx) {
+    if (!confirm('Delete this customer?')) return;
+    const list = DB.get('customers', []);
+    const removed = list.splice(idx, 1)[0];
+    DB.set('customers', list);
+    logAction('CUSTOMER_DELETED', removed.nameEn);
+    renderCustomers();
+    refreshDashboard();
+}
+
+// ==================== PRODUCTS ====================
+function renderProducts() {
+    const list = DB.get('products', []);
+    const tbody = document.getElementById('productsTable');
+    const empty = document.getElementById('productsEmpty');
+
+    if (list.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = list.map((p, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${esc(p.nameEn)}</td>
+            <td>${esc(p.sku || '-')}</td>
+            <td>${esc(p.unit)}</td>
+            <td>${Number(p.price).toFixed(2)}</td>
+            <td>${Number(p.vat).toFixed(2)}%</td>
+            <td>${esc(p.category)}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="editProduct(${i})"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${i})"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openProductModal() {
+    document.getElementById('prodId').value = '';
+    ['prodNameEn','prodNameAr','prodSku','prodDesc'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('prodUnit').value = 'PCE';
+    document.getElementById('prodPrice').value = '0.00';
+    document.getElementById('prodCategory').value = 'S';
+    document.getElementById('prodVat').value = '15.00';
+    productModal.show();
+}
+
+function onVatCategoryChange() {
+    const cat = document.getElementById('prodCategory').value;
+    const map = { S: 15, Z: 0, E: 0, O: 0 };
+    document.getElementById('prodVat').value = map[cat].toFixed(2);
+}
+
+function editProduct(idx) {
+    const p = DB.get('products', [])[idx];
+    if (!p) return;
+    document.getElementById('prodId').value = idx;
+    document.getElementById('prodNameEn').value = p.nameEn || '';
+    document.getElementById('prodNameAr').value = p.nameAr || '';
+    document.getElementById('prodSku').value = p.sku || '';
+    document.getElementById('prodUnit').value = p.unit || 'PCE';
+    document.getElementById('prodPrice').value = p.price || 0;
+    document.getElementById('prodCategory').value = p.category || 'S';
+    document.getElementById('prodVat').value = p.vat || 15;
+    document.getElementById('prodDesc').value = p.desc || '';
+    productModal.show();
+}
+
+function saveProduct() {
+    const nameEn = document.getElementById('prodNameEn').value.trim();
+    if (!nameEn) { alert('Name is required.'); return; }
+
+    const data = {
+        nameEn,
+        nameAr: document.getElementById('prodNameAr').value.trim(),
+        sku: document.getElementById('prodSku').value.trim(),
+        unit: document.getElementById('prodUnit').value,
+        price: Number(document.getElementById('prodPrice').value) || 0,
+        category: document.getElementById('prodCategory').value,
+        vat: Number(document.getElementById('prodVat').value) || 0,
+        desc: document.getElementById('prodDesc').value.trim()
+    };
+
+    const list = DB.get('products', []);
+    const idx = document.getElementById('prodId').value;
+
+    if (idx === '') { list.push(data); logAction('PRODUCT_ADDED', data.nameEn); }
+    else { list[Number(idx)] = data; logAction('PRODUCT_UPDATED', data.nameEn); }
+
+    DB.set('products', list);
+    productModal.hide();
+    renderProducts();
+}
+
+function deleteProduct(idx) {
+    if (!confirm('Delete this product?')) return;
+    const list = DB.get('products', []);
+    const removed = list.splice(idx, 1)[0];
+    DB.set('products', list);
+    logAction('PRODUCT_DELETED', removed.nameEn);
+    renderProducts();
+}
+
+// ==================== INVOICES ====================
+function renderInvoices() {
+    const list = DB.get('invoices', []);
+    const tbody = document.getElementById('invoicesTable');
+    const empty = document.getElementById('invoicesEmpty');
+
+    if (list.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    empty.style.display = 'none';
+
+    const statusBadge = {
+        draft: 'badge-draft',
+        generated: 'badge-generated',
+        pending: 'badge-pending',
+        cleared: 'badge-cleared',
+        reported: 'badge-reported',
+        rejected: 'badge-rejected',
+        failed: 'badge-failed'
+    };
+
+    tbody.innerHTML = list.map((inv, i) => `
+        <tr>
+            <td>${esc(inv.number)}</td>
+            <td>${formatType(inv.type)}</td>
+            <td>${esc(inv.date)}</td>
+            <td>${esc(inv.customerName || '-')}</td>
+            <td>${Number(inv.total || 0).toFixed(2)}</td>
+            <td>${Number(inv.vat || 0).toFixed(2)}</td>
+            <td><span class="badge ${statusBadge[inv.status] || 'bg-secondary'}">${inv.status}</span></td>
+            <td>
+                <button class="btn btn-sm btn-outline-info" onclick="viewInvoice(${i})"><i class="bi bi-eye"></i></button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteInvoice(${i})"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function formatType(t) {
+    return {
+        standard: 'Standard',
+        simplified: 'Simplified',
+        credit_note: 'Credit Note',
+        debit_note: 'Debit Note'
+    }[t] || t;
+}
+
+function openInvoiceModal() {
+    editingInvoiceLines = [];
+    const company = DB.get('company', {});
+    if (!company.vat) {
+        alert('Please fill in the Company Profile first (VAT number required).');
+        return;
+    }
+
+    // Auto invoice number
+    const invoices = DB.get('invoices', []);
+    const nextNum = 'INV-' + String(invoices.length + 1).padStart(6, '0');
+    document.getElementById('invNumber').value = nextNum;
+
+    // Today's date
+    document.getElementById('invDate').value = new Date().toISOString().slice(0, 10);
+    document.getElementById('invType').value = 'standard';
+
+    // Load customers
+    const custSelect = document.getElementById('invCustomer');
+    const customers = DB.get('customers', []);
+    custSelect.innerHTML = '<option value="">-- Select Customer --</option>' +
+        customers.map((c, i) => `<option value="${i}">${esc(c.nameEn)}${c.vat ? ' (VAT: ' + c.vat + ')' : ''}</option>`).join('');
+
+    document.getElementById('invItemsBody').innerHTML = '';
+    addInvoiceLine();
+    recalcInvoice();
+    invoiceModal.show();
+}
+
+function addInvoiceLine() {
+    const idx = editingInvoiceLines.length;
+    editingInvoiceLines.push({ desc: '', qty: 1, unit: 'PCE', price: 0, discount: 0, vat: 15 });
+    renderInvoiceLines();
+}
+
+function renderInvoiceLines() {
+    const tbody = document.getElementById('invItemsBody');
+    const products = DB.get('products', []);
+
+    tbody.innerHTML = editingInvoiceLines.map((line, i) => `
+        <tr>
+            <td>
+                <input type="text" class="form-control form-control-sm" value="${esc(line.desc)}"
+                       oninput="updateLine(${i}, 'desc', this.value)"
+                       list="productList${i}" placeholder="Description">
+                <datalist id="productList${i}">
+                    ${products.map(p => `<option value="${esc(p.nameEn)}">${esc(p.price)}</option>`).join('')}
+                </datalist>
+            </td>
+            <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.qty}"
+                       oninput="updateLine(${i}, 'qty', this.value)"></td>
+            <td><input type="text" class="form-control form-control-sm" value="${esc(line.unit)}"
+                       oninput="updateLine(${i}, 'unit', this.value)"></td>
+            <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.price}"
+                       oninput="updateLine(${i}, 'price', this.value)"></td>
+            <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.discount}"
+                       oninput="updateLine(${i}, 'discount', this.value)"></td>
+            <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.vat}"
+                       oninput="updateLine(${i}, 'vat', this.value)"></td>
+            <td class="text-end"><span id="lineTotal${i}">0.00</span></td>
+            <td><button class="btn btn-sm btn-outline-danger" onclick="removeLine(${i})"><i class="bi bi-x"></i></button></td>
+        </tr>
+    `).join('');
+
+    recalcInvoice();
+}
+
+function updateLine(i, field, value) {
+    editingInvoiceLines[i][field] = field === 'desc' || field === 'unit' ? value : Number(value) || 0;
+    recalcInvoice();
+}
+
+function removeLine(i) {
+    editingInvoiceLines.splice(i, 1);
+    renderInvoiceLines();
+}
+
+function recalcInvoice() {
+    let subtotal = 0, vatTotal = 0;
+    editingInvoiceLines.forEach((line, i) => {
+        const base = line.qty * line.price - (line.discount || 0);
+        const vat = base * (line.vat / 100);
+        const total = base + vat;
+        const el = document.getElementById('lineTotal' + i);
+        if (el) el.textContent = total.toFixed(2);
+        subtotal += base;
+        vatTotal += vat;
+    });
+
+    document.getElementById('invSubtotal').textContent = subtotal.toFixed(2);
+    document.getElementById('invVatTotal').textContent = vatTotal.toFixed(2);
+    document.getElementById('invGrandTotal').textContent = (subtotal + vatTotal).toFixed(2);
+}
+
+function saveInvoice() {
+    const invType = document.getElementById('invType').value;
+    const custIdx = document.getElementById('invCustomer').value;
+    const date = document.getElementById('invDate').value;
+
+    if (custIdx === '') { alert('Please select a customer.'); return; }
+    if (editingInvoiceLines.length === 0) { alert('Add at least one line item.'); return; }
+
+    const customers = DB.get('customers', []);
+    const customer = customers[Number(custIdx)];
+
+    const subtotal = editingInvoiceLines.reduce((s, l) => s + (l.qty * l.price - (l.discount || 0)), 0);
+    const vat = editingInvoiceLines.reduce((s, l) => s + ((l.qty * l.price - (l.discount || 0)) * l.vat / 100), 0);
+
+    const inv = {
+        number: document.getElementById('invNumber').value,
+        uuid: crypto.randomUUID ? crypto.randomUUID() : 'uuid-' + Date.now(),
+        type: invType,
+        date,
+        time: new Date().toTimeString().slice(0, 8),
+        customerName: customer.nameEn,
+        customerVat: customer.vat || '',
+        currency: 'SAR',
+        lines: JSON.parse(JSON.stringify(editingInvoiceLines)),
+        subtotal,
+        vat,
+        total: subtotal + vat,
+        status: 'draft',
+        createdAt: new Date().toISOString()
+    };
+
+    const invoices = DB.get('invoices', []);
+    invoices.push(inv);
+    DB.set('invoices', invoices);
+    logAction('INVOICE_CREATED', `${inv.number} (${formatType(inv.type)})`);
+
+    invoiceModal.hide();
+    renderInvoices();
+    refreshDashboard();
+}
+
+function viewInvoice(idx) {
+    const inv = DB.get('invoices', [])[idx];
+    if (!inv) return;
+
+    const lines = inv.lines.map(l => {
+        const base = l.qty * l.price - (l.discount || 0);
+        const v = base * l.vat / 100;
+        return `<tr>
+            <td>${esc(l.desc)}</td>
+            <td>${l.qty}</td>
+            <td>${esc(l.unit)}</td>
+            <td>${Number(l.price).toFixed(2)}</td>
+            <td>${Number(l.discount).toFixed(2)}</td>
+            <td>${Number(l.vat).toFixed(2)}%</td>
+            <td>${(base + v).toFixed(2)}</td>
+        </tr>`;
+    }).join('');
+
+    const html = `
+        <div class="p-3">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5>${esc(inv.number)}</h5>
+                    <p class="text-muted mb-1">Type: ${formatType(inv.type)}</p>
+                    <p class="text-muted mb-1">UUID: ${esc(inv.uuid)}</p>
+                    <p class="text-muted mb-1">Date: ${esc(inv.date)} ${esc(inv.time || '')}</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-1"><strong>Customer:</strong> ${esc(inv.customerName)}</p>
+                    <p class="mb-1"><strong>VAT:</strong> ${esc(inv.customerVat || '-')}</p>
+                    <p class="mb-1"><strong>Status:</strong> <span class="badge bg-secondary">${inv.status}</span></p>
+                </div>
+            </div>
+            <table class="table table-sm">
+                <thead>
+                    <tr><th>Description</th><th>Qty</th><th>Unit</th><th>Price</th><th>Discount</th><th>VAT</th><th>Total</th></tr>
+                </thead>
+                <tbody>${lines}</tbody>
+            </table>
+            <div class="row justify-content-end">
+                <div class="col-md-5">
+                    <table class="table table-sm">
+                        <tr><td>Subtotal</td><td class="text-end">${Number(inv.subtotal).toFixed(2)}</td></tr>
+                        <tr><td>VAT</td><td class="text-end">${Number(inv.vat).toFixed(2)}</td></tr>
+                        <tr class="invoice-total-row"><td>Total</td><td class="text-end">${Number(inv.total).toFixed(2)} SAR</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="alert alert-info small mt-3">
+                <strong>Next steps (Stage 4+):</strong> Generate ZATCA XML, compute hash, sign with CSID, generate TLV QR, and submit to Fatoora API for clearance/reporting.
+            </div>
+        </div>
+    `;
+
+    const w = window.open('', '_blank');
+    w.document.write(`<html><head><title>${inv.number}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        </head><body>${html}</body></html>`);
+    w.document.close();
+}
+
+function deleteInvoice(idx) {
+    if (!confirm('Delete this invoice?')) return;
+    const invoices = DB.get('invoices', []);
+    const removed = invoices.splice(idx, 1)[0];
+    DB.set('invoices', invoices);
+    logAction('INVOICE_DELETED', removed.number);
+    renderInvoices();
+    refreshDashboard();
+}
+
+// ==================== ZATCA SETTINGS ====================
+function loadZatca() {
+    const z = DB.get('zatca', {});
+    const c = DB.get('company', {});
+    document.getElementById('zEnv').value = z.env || 'sandbox';
+    document.getElementById('zEgsUuid').value = z.egsUuid || 'Auto-generated on first submission';
+    document.getElementById('zVat').value = c.vat || 'Not set';
+    document.getElementById('zCsid').value = z.complianceCsid ? 'Configured (Sandbox)' : 'Not Configured';
+    document.getElementById('zCompliance').value = z.complianceCsid || '';
+    document.getElementById('zSecret').value = z.complianceSecret || '';
+}
+
+function saveZatca() {
+    const alertEl = document.getElementById('zatcaAlert');
+    const data = {
+        env: document.getElementById('zEnv').value,
+        egsUuid: document.getElementById('zEgsUuid').value.trim() || 'egs-' + Date.now(),
+        complianceCsid: document.getElementById('zCompliance').value.trim(),
+        complianceSecret: document.getElementById('zSecret').value.trim()
+    };
+    DB.set('zatca', data);
+    logAction('ZATCA_CONFIG_SAVED', 'Environment: ' + data.env);
+    alertEl.textContent = 'ZATCA configuration saved.';
+    alertEl.className = 'alert-custom alert-success show';
+    setTimeout(() => alertEl.className = 'alert-custom', 3000);
+    loadZatca();
+}
+
+// ==================== LOGS ====================
+function renderLogs() {
+    const logs = DB.get('logs', []);
+    const tbody = document.getElementById('logsTable');
+    const empty = document.getElementById('logsEmpty');
+
+    if (logs.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+    }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = logs.map(l => `
+        <tr>
+            <td>${esc(l.time)}</td>
+            <td>${esc(l.user)}</td>
+            <td><span class="badge bg-secondary">${esc(l.action)}</span></td>
+            <td>${esc(l.details || '')}</td>
+        </tr>
+    `).join('');
+}
+
+function clearLogs() {
+    if (!confirm('Clear all logs?')) return;
+    DB.set('logs', []);
+    renderLogs();
+}
+
+// ==================== UTIL ====================
+function esc(s) {
+    if (s === null || s === undefined) return '';
+    return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function refreshAll() {
+    refreshDashboard();
+    renderCustomers();
+    renderProducts();
+    renderInvoices();
+    renderLogs();
+    loadCompany();
+    loadZatca();
+}
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', () => {
+    customerModal = new bootstrap.Modal(document.getElementById('customerModal'));
+    productModal = new bootstrap.Modal(document.getElementById('productModal'));
+    invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
+    pwModal = new bootstrap.Modal(document.getElementById('pwModal'));
+
+    getUsers();
+
+    const session = getSession();
+    if (session) {
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('appPage').classList.remove('hidden');
+        document.getElementById('navUsername').textContent = session;
+        refreshAll();
+    }
+});
+</script>
+</body>
+</html>
