@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZATCA Phase 2 E-Invoicing — Saudi Arabia</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>نظام الفاتورة الإلكترونية — هيئة الزكاة والضريبة والجمارك</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
     background: #f4f6fb;
     margin: 0;
     min-height: 100vh;
+    direction: rtl;
+    text-align: right;
 }
 
-/* ==================== LOGIN ==================== */
+/* ==================== صفحة تسجيل الدخول ==================== */
 .login-page {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     min-height: 100vh;
@@ -38,20 +40,17 @@ body {
 
 .login-card h3 { font-weight: 700; color: #1e3c72; margin-bottom: 5px; }
 .login-card .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 30px; }
-.login-card .form-control { border-radius: 8px; padding: 12px 16px; border: 2px solid #e0e0e0; }
+.login-card .form-control { border-radius: 8px; padding: 12px 16px; border: 2px solid #e0e0e0; text-align: right; }
 .login-card .form-control:focus { border-color: #2a5298; box-shadow: 0 0 0 0.2rem rgba(42,82,152,0.15); }
 .login-card .btn-primary {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     border: none; border-radius: 8px; padding: 12px; font-weight: 600;
 }
 
-/* ==================== LAYOUT ==================== */
-.app-layout {
-    display: flex;
-    min-height: 100vh;
-}
+/* ==================== التخطيط العام ==================== */
+.app-layout { display: flex; min-height: 100vh; }
 
-/* Sidebar */
+/* القائمة الجانبية */
 .sidebar {
     width: 260px;
     background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
@@ -59,8 +58,9 @@ body {
     padding: 20px 0;
     flex-shrink: 0;
     position: fixed;
-    top: 0; bottom: 0; left: 0;
+    top: 0; bottom: 0; right: 0;
     overflow-y: auto;
+    z-index: 200;
 }
 
 .sidebar .brand {
@@ -78,32 +78,22 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
     transition: all 0.2s;
     cursor: pointer;
     font-size: 0.92rem;
 }
 
-.sidebar .nav-link:hover {
-    background: rgba(255,255,255,0.08);
-    color: #fff;
-}
-
+.sidebar .nav-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
 .sidebar .nav-link.active {
     background: rgba(255,255,255,0.15);
     color: #fff;
-    border-left-color: #38ef7d;
+    border-right-color: #38ef7d;
     font-weight: 600;
 }
-
 .sidebar .nav-link i { font-size: 1.1rem; }
 
-/* Main content */
-.main-content {
-    margin-left: 260px;
-    flex: 1;
-    min-width: 0;
-}
+.main-content { margin-right: 260px; flex: 1; min-width: 0; }
 
 .topbar {
     background: #fff;
@@ -115,17 +105,18 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .topbar h5 { margin: 0; color: #1e3c72; font-weight: 600; }
 .topbar .user-info { color: #666; font-size: 0.9rem; }
 
 .page-body { padding: 30px; }
-
 .page-section { display: none; }
 .page-section.active { display: block; }
 
-/* Stat cards */
+/* بطاقات الإحصائيات */
 .stat-card {
     border: none;
     border-radius: 12px;
@@ -134,22 +125,18 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     height: 100%;
 }
-
 .stat-card .stat-label {
     font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
     opacity: 0.9;
     margin-bottom: 6px;
 }
-
 .stat-card .stat-value {
     font-size: 1.9rem;
     font-weight: 700;
     margin: 0;
     line-height: 1;
 }
-
 .stat-primary { background: linear-gradient(135deg, #667eea, #764ba2); }
 .stat-success { background: linear-gradient(135deg, #11998e, #38ef7d); }
 .stat-info    { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
@@ -157,7 +144,7 @@ body {
 .stat-danger  { background: linear-gradient(135deg, #eb3349, #f45c43); }
 .stat-dark    { background: linear-gradient(135deg, #232526, #414345); }
 
-/* Card */
+/* البطاقات */
 .card {
     border: none;
     border-radius: 12px;
@@ -174,32 +161,32 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .card-body { padding: 20px; }
 
-/* Table */
+/* الجداول */
 .table thead th {
     background: #f4f6fb;
     color: #1e3c72;
     font-size: 0.82rem;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
     border-bottom: 1px solid #e0e0e0;
+    text-align: right;
 }
+.table td { vertical-align: middle; font-size: 0.9rem; text-align: right; }
 
-.table td { vertical-align: middle; font-size: 0.9rem; }
-
-/* Buttons */
+/* الأزرار */
 .btn-primary {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     border: none;
 }
 .btn-primary:hover { background: linear-gradient(135deg, #16305e, #234a8a); }
-
 .btn-sm { padding: 4px 10px; font-size: 0.8rem; }
 
-/* Alerts */
+/* التنبيهات */
 .alert-custom {
     border-radius: 8px;
     padding: 12px 16px;
@@ -208,11 +195,11 @@ body {
     display: none;
 }
 .alert-custom.show { display: block; }
-.alert-error { background: #fdecea; color: #c0392b; border-left: 4px solid #e74c3c; }
-.alert-success { background: #e8f8f0; color: #1e8449; border-left: 4px solid #27ae60; }
-.alert-info { background: #e8f4fd; color: #1a5276; border-left: 4px solid #3498db; }
+.alert-error { background: #fdecea; color: #c0392b; border-right: 4px solid #e74c3c; }
+.alert-success { background: #e8f8f0; color: #1e8449; border-right: 4px solid #27ae60; }
+.alert-info { background: #e8f4fd; color: #1a5276; border-right: 4px solid #3498db; }
 
-/* Status badges */
+/* شارات الحالة */
 .badge-draft { background: #95a5a6; }
 .badge-generated { background: #3498db; }
 .badge-cleared { background: #27ae60; }
@@ -220,6 +207,7 @@ body {
 .badge-rejected { background: #e74c3c; }
 .badge-failed { background: #c0392b; }
 .badge-pending { background: #f39c12; }
+.badge-validated { background: #9b59b6; }
 
 .hidden { display: none !important; }
 
@@ -233,16 +221,58 @@ body {
 .modal-content { border-radius: 12px; border: none; }
 .modal-header { background: #f4f6fb; border-radius: 12px 12px 0 0; }
 
-.invoice-total-row {
-    background: #f4f6fb;
+.invoice-total-row { background: #f4f6fb; font-weight: 600; }
+
+.code-block {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.82rem;
+    max-height: 400px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    direction: ltr;
+    text-align: left;
+}
+
+.qr-preview {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px dashed #ddd;
+    text-align: center;
+}
+
+.step-item {
+    padding: 12px 15px;
+    border-right: 3px solid #ddd;
+    margin-bottom: 8px;
+    background: #fafbfc;
+    border-radius: 8px 0 0 8px;
+}
+.step-item.done { border-right-color: #27ae60; background: #e8f8f0; }
+.step-item.pending { border-right-color: #f39c12; background: #fef5e7; }
+.step-item.error { border-right-color: #e74c3c; background: #fdecea; }
+
+.info-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 
-/* Responsive */
+input[type="number"] { direction: ltr; text-align: left; }
+.form-control, .form-select { text-align: right; }
+.form-control[dir="ltr"], .code-block, input[type="number"] { text-align: left; }
+
 @media (max-width: 768px) {
-    .sidebar { transform: translateX(-100%); transition: transform 0.3s; z-index: 1000; }
+    .sidebar { transform: translateX(100%); transition: transform 0.3s; z-index: 1000; }
     .sidebar.open { transform: translateX(0); }
-    .main-content { margin-left: 0; }
+    .main-content { margin-right: 0; }
     .page-body { padding: 15px; }
 }
 </style>
@@ -250,220 +280,230 @@ body {
 
 <body>
 
-<!-- ==================== LOGIN PAGE ==================== -->
+<!-- ==================== صفحة تسجيل الدخول ==================== -->
 <div id="loginPage" class="login-page">
     <div>
         <div class="login-card">
-            <h3>ZATCA E-Invoicing</h3>
-            <p class="subtitle">Phase 2 Integration — Saudi Arabia</p>
+            <h3>نظام الفاتورة الإلكترونية</h3>
+            <p class="subtitle">المرحلة الأولى والثانية — المملكة العربية السعودية</p>
 
             <div id="loginAlert" class="alert-custom alert-error"></div>
 
             <form onsubmit="handleLogin(event)">
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Username</label>
+                    <label class="form-label fw-semibold">اسم المستخدم</label>
                     <input type="text" class="form-control" id="username" value="admin" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Password</label>
+                    <label class="form-label fw-semibold">كلمة المرور</label>
                     <input type="password" class="form-control" id="password" value="Admin@123" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
             </form>
             <div style="margin-top:20px; font-size:0.8rem; color:#888; text-align:center;">
-                Demo: <strong>admin</strong> / <strong>Admin@123</strong>
+                للتجربة: <strong>admin</strong> / <strong>Admin@123</strong>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- ==================== MAIN APP ==================== -->
+<!-- ==================== التطبيق الرئيسي ==================== -->
 <div id="appPage" class="app-layout hidden">
 
-    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="brand">
             <h4><i class="bi bi-receipt-cutoff"></i> ZATCA</h4>
-            <small>Phase 2 E-Invoicing</small>
+            <small>نظام الفاتورة الإلكترونية</small>
         </div>
 
         <nav class="nav flex-column">
             <a class="nav-link active" onclick="switchPage('dashboard', this)">
-                <i class="bi bi-speedometer2"></i> Dashboard
+                <i class="bi bi-speedometer2"></i> لوحة التحكم
             </a>
             <a class="nav-link" onclick="switchPage('company', this)">
-                <i class="bi bi-building"></i> Company Profile
+                <i class="bi bi-building"></i> بيانات المنشأة
             </a>
             <a class="nav-link" onclick="switchPage('customers', this)">
-                <i class="bi bi-people"></i> Customers
+                <i class="bi bi-people"></i> العملاء
             </a>
             <a class="nav-link" onclick="switchPage('products', this)">
-                <i class="bi bi-box-seam"></i> Products / Services
+                <i class="bi bi-box-seam"></i> المنتجات / الخدمات
             </a>
             <a class="nav-link" onclick="switchPage('invoices', this)">
-                <i class="bi bi-file-earmark-text"></i> Invoices
+                <i class="bi bi-file-earmark-text"></i> الفواتير
             </a>
             <a class="nav-link" onclick="switchPage('zatca', this)">
-                <i class="bi bi-shield-lock"></i> ZATCA Settings
+                <i class="bi bi-shield-lock"></i> إعدادات الهيئة
+            </a>
+            <a class="nav-link" onclick="switchPage('onboarding', this)">
+                <i class="bi bi-rocket-takeoff"></i> التسجيل الإلكتروني
             </a>
             <a class="nav-link" onclick="switchPage('logs', this)">
-                <i class="bi bi-journal-text"></i> Logs
+                <i class="bi bi-journal-text"></i> سجل العمليات
             </a>
         </nav>
     </aside>
 
-    <!-- Main content -->
     <div class="main-content">
 
         <div class="topbar">
             <button class="btn btn-sm btn-outline-secondary d-md-none" onclick="toggleSidebar()">
                 <i class="bi bi-list"></i>
             </button>
-            <h5 id="pageTitle">Dashboard</h5>
+            <h5 id="pageTitle">لوحة التحكم</h5>
             <div class="d-flex align-items-center gap-3">
                 <span class="user-info"><i class="bi bi-person-circle"></i> <span id="navUsername">admin</span></span>
-                <button onclick="showChangePassword()" class="btn btn-sm btn-outline-primary">Change Password</button>
-                <button onclick="handleLogout()" class="btn btn-sm btn-outline-danger">Logout</button>
+                <button onclick="showChangePassword()" class="btn btn-sm btn-outline-primary">تغيير كلمة المرور</button>
+                <button onclick="handleLogout()" class="btn btn-sm btn-outline-danger">تسجيل الخروج</button>
             </div>
         </div>
 
         <div class="page-body">
 
-            <!-- ==================== DASHBOARD ==================== -->
+            <!-- ==================== لوحة التحكم ==================== -->
             <section id="page-dashboard" class="page-section active">
                 <div class="row g-3">
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-primary">
-                            <div class="stat-label">Total Invoices</div>
+                            <div class="stat-label">إجمالي الفواتير</div>
                             <p class="stat-value" id="statTotal">0</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-success">
-                            <div class="stat-label">Cleared</div>
+                            <div class="stat-label">تم الاعتماد (Clearance)</div>
                             <p class="stat-value" id="statCleared">0</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-info">
-                            <div class="stat-label">Reported</div>
+                            <div class="stat-label">تم الإبلاغ (Reporting)</div>
                             <p class="stat-value" id="statReported">0</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-warning">
-                            <div class="stat-label">Pending</div>
+                            <div class="stat-label">قيد الإرسال</div>
                             <p class="stat-value" id="statPending">0</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-danger">
-                            <div class="stat-label">Rejected</div>
+                            <div class="stat-label">مرفوضة</div>
                             <p class="stat-value" id="statRejected">0</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-dark">
-                            <div class="stat-label">Total Sales (SAR)</div>
-                            <p class="stat-value" id="statSales">0</p>
+                            <div class="stat-label">إجمالي المبيعات (ر.س)</div>
+                            <p class="stat-value" id="statSales">0.00</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-primary">
-                            <div class="stat-label">Total VAT (SAR)</div>
-                            <p class="stat-value" id="statVat">0</p>
+                            <div class="stat-label">إجمالي الضريبة (ر.س)</div>
+                            <p class="stat-value" id="statVat">0.00</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="stat-card stat-info">
-                            <div class="stat-label">Customers</div>
+                            <div class="stat-label">العملاء</div>
                             <p class="stat-value" id="statCustomers">0</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <span><i class="bi bi-info-circle"></i> حالة النظام</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="systemStatus"></div>
+                    </div>
+                </div>
             </section>
 
-            <!-- ==================== COMPANY ==================== -->
+            <!-- ==================== بيانات المنشأة ==================== -->
             <section id="page-company" class="page-section">
                 <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-building"></i> Company / Seller Profile</span>
+                        <span><i class="bi bi-building"></i> بيانات المنشأة (البائع)</span>
                         <button class="btn btn-sm btn-primary" onclick="saveCompany()">
-                            <i class="bi bi-save"></i> Save
+                            <i class="bi bi-save"></i> حفظ
                         </button>
                     </div>
                     <div class="card-body">
                         <div id="companyAlert" class="alert-custom"></div>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Legal Business Name (English) *</label>
-                                <input type="text" class="form-control" id="cLegalEn" placeholder="e.g. Al Noor Trading Co.">
+                                <label class="form-label">الاسم القانوني للمنشأة (بالإنجليزية) *</label>
+                                <input type="text" class="form-control" id="cLegalEn" placeholder="مثال: Al Noor Trading Co." dir="ltr">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Legal Business Name (Arabic) *</label>
-                                <input type="text" class="form-control" id="cLegalAr" placeholder="مثال: شركة النور التجارية" dir="rtl">
+                                <label class="form-label">الاسم القانوني للمنشأة (بالعربية) *</label>
+                                <input type="text" class="form-control" id="cLegalAr" placeholder="مثال: شركة النور التجارية">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">VAT Registration Number *</label>
-                                <input type="text" class="form-control" id="cVat" placeholder="3XXXXXXXXXXXXXX" maxlength="15">
+                                <label class="form-label">الرقم الضريبي (VAT) *</label>
+                                <input type="text" class="form-control" id="cVat" placeholder="3XXXXXXXXXXXXXX" maxlength="15" dir="ltr">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Commercial Registration Number</label>
-                                <input type="text" class="form-control" id="cCrn" placeholder="1010XXXXXX">
+                                <label class="form-label">السجل التجاري (CRN)</label>
+                                <input type="text" class="form-control" id="cCrn" placeholder="1010XXXXXX" dir="ltr">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Building Number</label>
-                                <input type="text" class="form-control" id="cBuilding" placeholder="1234" maxlength="4">
+                                <label class="form-label">رقم المبنى</label>
+                                <input type="text" class="form-control" id="cBuilding" placeholder="1234" maxlength="4" dir="ltr">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Street Name</label>
-                                <input type="text" class="form-control" id="cStreet" placeholder="King Fahd Road">
+                                <label class="form-label">اسم الشارع</label>
+                                <input type="text" class="form-control" id="cStreet" placeholder="طريق الملك فهد">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">District</label>
-                                <input type="text" class="form-control" id="cDistrict" placeholder="Al Olaya">
+                                <label class="form-label">الحي</label>
+                                <input type="text" class="form-control" id="cDistrict" placeholder="العليا">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">City</label>
-                                <input type="text" class="form-control" id="cCity" placeholder="Riyadh">
+                                <label class="form-label">المدينة</label>
+                                <input type="text" class="form-control" id="cCity" placeholder="الرياض">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Postal Code</label>
-                                <input type="text" class="form-control" id="cPostal" placeholder="12345" maxlength="5">
+                                <label class="form-label">الرمز البريدي</label>
+                                <input type="text" class="form-control" id="cPostal" placeholder="12345" maxlength="5" dir="ltr">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Additional Number</label>
-                                <input type="text" class="form-control" id="cAdditional" placeholder="5678" maxlength="4">
+                                <label class="form-label">الرقم الإضافي</label>
+                                <input type="text" class="form-control" id="cAdditional" placeholder="5678" maxlength="4" dir="ltr">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Country Code</label>
-                                <input type="text" class="form-control" id="cCountry" value="SA" readonly>
+                                <label class="form-label">رمز الدولة</label>
+                                <input type="text" class="form-control" id="cCountry" value="SA" readonly dir="ltr">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Industry</label>
-                                <input type="text" class="form-control" id="cIndustry" placeholder="Retail">
+                                <label class="form-label">النشاط التجاري</label>
+                                <input type="text" class="form-control" id="cIndustry" placeholder="تجارة التجزئة">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Contact Phone</label>
-                                <input type="text" class="form-control" id="cPhone" placeholder="+966 11 123 4567">
+                                <label class="form-label">رقم الهاتف</label>
+                                <input type="text" class="form-control" id="cPhone" placeholder="+966 11 123 4567" dir="ltr">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Contact Email</label>
-                                <input type="email" class="form-control" id="cEmail" placeholder="info@company.sa">
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="cEmail" placeholder="info@company.sa" dir="ltr">
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ==================== CUSTOMERS ==================== -->
+            <!-- ==================== العملاء ==================== -->
             <section id="page-customers" class="page-section">
                 <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-people"></i> Customers</span>
+                        <span><i class="bi bi-people"></i> العملاء</span>
                         <button class="btn btn-sm btn-primary" onclick="openCustomerModal()">
-                            <i class="bi bi-plus-lg"></i> Add Customer
+                            <i class="bi bi-plus-lg"></i> إضافة عميل
                         </button>
                     </div>
                     <div class="card-body">
@@ -473,12 +513,12 @@ body {
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name (EN)</th>
-                                        <th>Name (AR)</th>
-                                        <th>VAT Number</th>
-                                        <th>City</th>
-                                        <th>Type</th>
-                                        <th>Actions</th>
+                                        <th>الاسم (إنجليزي)</th>
+                                        <th>الاسم (عربي)</th>
+                                        <th>الرقم الضريبي</th>
+                                        <th>المدينة</th>
+                                        <th>النوع</th>
+                                        <th>إجراءات</th>
                                     </tr>
                                 </thead>
                                 <tbody id="customersTable"></tbody>
@@ -486,19 +526,19 @@ body {
                         </div>
                         <div id="customersEmpty" class="empty-state">
                             <i class="bi bi-people"></i>
-                            <p>No customers yet. Click "Add Customer" to start.</p>
+                            <p>لا يوجد عملاء بعد. اضغط "إضافة عميل" للبدء.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ==================== PRODUCTS ==================== -->
+            <!-- ==================== المنتجات ==================== -->
             <section id="page-products" class="page-section">
                 <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-box-seam"></i> Products / Services</span>
+                        <span><i class="bi bi-box-seam"></i> المنتجات / الخدمات</span>
                         <button class="btn btn-sm btn-primary" onclick="openProductModal()">
-                            <i class="bi bi-plus-lg"></i> Add Product
+                            <i class="bi bi-plus-lg"></i> إضافة منتج
                         </button>
                     </div>
                     <div class="card-body">
@@ -508,13 +548,13 @@ body {
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name (EN)</th>
-                                        <th>SKU</th>
-                                        <th>Unit</th>
-                                        <th>Unit Price</th>
-                                        <th>VAT %</th>
-                                        <th>Category</th>
-                                        <th>Actions</th>
+                                        <th>الاسم (إنجليزي)</th>
+                                        <th>رمز المنتج</th>
+                                        <th>الوحدة</th>
+                                        <th>سعر الوحدة</th>
+                                        <th>نسبة الضريبة</th>
+                                        <th>الفئة</th>
+                                        <th>إجراءات</th>
                                     </tr>
                                 </thead>
                                 <tbody id="productsTable"></tbody>
@@ -522,19 +562,19 @@ body {
                         </div>
                         <div id="productsEmpty" class="empty-state">
                             <i class="bi bi-box-seam"></i>
-                            <p>No products yet. Click "Add Product" to start.</p>
+                            <p>لا توجد منتجات بعد. اضغط "إضافة منتج" للبدء.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ==================== INVOICES ==================== -->
+            <!-- ==================== الفواتير ==================== -->
             <section id="page-invoices" class="page-section">
                 <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-file-earmark-text"></i> Invoices</span>
+                        <span><i class="bi bi-file-earmark-text"></i> الفواتير</span>
                         <button class="btn btn-sm btn-primary" onclick="openInvoiceModal()">
-                            <i class="bi bi-plus-lg"></i> Create Invoice
+                            <i class="bi bi-plus-lg"></i> إنشاء فاتورة
                         </button>
                     </div>
                     <div class="card-body">
@@ -543,14 +583,14 @@ body {
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Invoice #</th>
-                                        <th>Type</th>
-                                        <th>Date</th>
-                                        <th>Customer</th>
-                                        <th>Total (SAR)</th>
-                                        <th>VAT (SAR)</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>رقم الفاتورة</th>
+                                        <th>النوع</th>
+                                        <th>التاريخ</th>
+                                        <th>العميل</th>
+                                        <th>الإجمالي (ر.س)</th>
+                                        <th>الضريبة (ر.س)</th>
+                                        <th>الحالة</th>
+                                        <th>إجراءات</th>
                                     </tr>
                                 </thead>
                                 <tbody id="invoicesTable"></tbody>
@@ -558,83 +598,148 @@ body {
                         </div>
                         <div id="invoicesEmpty" class="empty-state">
                             <i class="bi bi-file-earmark-text"></i>
-                            <p>No invoices yet. Click "Create Invoice" to start.</p>
+                            <p>لا توجد فواتير بعد. اضغط "إنشاء فاتورة" للبدء.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ==================== ZATCA SETTINGS ==================== -->
+            <!-- ==================== إعدادات الهيئة ==================== -->
             <section id="page-zatca" class="page-section">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-header">
-                        <span><i class="bi bi-shield-lock"></i> ZATCA Configuration</span>
+                        <span><i class="bi bi-shield-lock"></i> إعدادات هيئة الزكاة والضريبة والجمارك</span>
                         <button class="btn btn-sm btn-primary" onclick="saveZatca()">
-                            <i class="bi bi-save"></i> Save
+                            <i class="bi bi-save"></i> حفظ
                         </button>
                     </div>
                     <div class="card-body">
                         <div id="zatcaAlert" class="alert-custom"></div>
 
-                        <div class="alert alert-info">
-                            <i class="bi bi-info-circle"></i>
-                            <strong>Onboarding required:</strong> You must obtain CSID from ZATCA Fatoora Portal before submitting invoices.
-                        </div>
-
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Environment</label>
+                                <label class="form-label">البيئة</label>
                                 <select class="form-select" id="zEnv">
-                                    <option value="sandbox">Sandbox (Testing)</option>
-                                    <option value="simulation">Simulation</option>
-                                    <option value="production">Production (Live)</option>
+                                    <option value="sandbox">بيئة الاختبار (Sandbox)</option>
+                                    <option value="simulation">بيئة المحاكاة (Simulation)</option>
+                                    <option value="production">بيئة الإنتاج (Production)</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">EGS UUID</label>
-                                <input type="text" class="form-control" id="zEgsUuid" placeholder="Auto-generated">
+                                <label class="form-label">معرف الجهاز (EGS UUID)</label>
+                                <input type="text" class="form-control" id="zEgsUuid" readonly dir="ltr">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">VAT Number</label>
-                                <input type="text" class="form-control" id="zVat" readonly>
+                                <label class="form-label">الرقم الضريبي</label>
+                                <input type="text" class="form-control" id="zVat" readonly dir="ltr">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">CSID Status</label>
-                                <input type="text" class="form-control" id="zCsid" value="Not Configured" readonly>
+                                <label class="form-label">حالة الشهادة (CSID)</label>
+                                <input type="text" class="form-control" id="zCsid" readonly>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Compliance CSID</label>
-                                <input type="text" class="form-control" id="zCompliance" placeholder="Paste CCSID here">
+                                <label class="form-label">شهادة الامتثال (Compliance CSID)</label>
+                                <textarea class="form-control" id="zCompliance" rows="3" placeholder="الصق شهادة الامتثال هنا" dir="ltr"></textarea>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Compliance Secret</label>
-                                <input type="password" class="form-control" id="zSecret" placeholder="Paste secret here">
+                                <label class="form-label">السر الخاص بالامتثال</label>
+                                <textarea class="form-control" id="zSecret" rows="3" placeholder="الصق السر هنا" dir="ltr"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">شهادة الإنتاج (Production CSID)</label>
+                                <textarea class="form-control" id="zProdCsid" rows="3" placeholder="الصق شهادة الإنتاج هنا" dir="ltr"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">السر الخاص بالإنتاج</label>
+                                <textarea class="form-control" id="zProdSecret" rows="3" placeholder="الصق سر الإنتاج هنا" dir="ltr"></textarea>
                             </div>
                         </div>
 
-                        <hr class="my-4">
+                        <div class="alert alert-info mt-3 small">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>ملاحظة أمنية:</strong> في بيئة الإنتاج، يجب عدم تخزين المفاتيح الخاصة والأسرار في المتصفح. يجب أن تُخزَّن في الخادم باستخدام تشفير آمن. هذا العرض التوضيحي يخزنها محليًا لأغراض الاختبار فقط.
+                        </div>
+                    </div>
+                </div>
 
-                        <h6 class="text-muted">Onboarding Steps:</h6>
-                        <ol class="small text-muted">
-                            <li>Create taxpayer account on ZATCA Fatoora Portal</li>
-                            <li>Generate CSR (Certificate Signing Request)</li>
-                            <li>Obtain OTP from portal</li>
-                            <li>Submit CSR + OTP to get Compliance CSID</li>
-                            <li>Run 6 compliance checks (Standard + Simplified invoice, credit note, debit note)</li>
-                            <li>Obtain Production CSID</li>
-                            <li>Start submitting real invoices</li>
-                        </ol>
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-clipboard-check"></i> التحقق بواسطة أداة الهيئة (SDK)</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="showSdkInfo()">
+                            <i class="bi bi-question-circle"></i> كيفية الاستخدام
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">يمكنك التحقق من صحة ملف XML ورمز QR والتوقيع الإلكتروني باستخدام أداة ZATCA Compliance and Enablement Toolbox SDK الرسمية.</p>
+                        <div id="sdkResult" class="alert-custom"></div>
+                        <button class="btn btn-primary" onclick="runFakeSdkValidation()">
+                            <i class="bi bi-check2-circle"></i> تحقق بواسطة أداة الهيئة
+                        </button>
                     </div>
                 </div>
             </section>
 
-            <!-- ==================== LOGS ==================== -->
+            <!-- ==================== التسجيل الإلكتروني ==================== -->
+            <section id="page-onboarding" class="page-section">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-rocket-takeoff"></i> معالج التسجيل في الهيئة</span>
+                        <span class="info-badge bg-warning text-dark">مطلوب قبل إصدار الفواتير الفعلية</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">اتبع هذه الخطوات بالترتيب للحصول على بيانات الاعتماد من الهيئة.</p>
+
+                        <div class="step-item done">
+                            <strong>الخطوة 1 — إنشاء حساب دافع الضريبة</strong>
+                            <p class="mb-0 small text-muted">سجّل في بوابة فاتورة (fatoora.zatca.gov.sa) باستخدام رقمك الضريبي.</p>
+                        </div>
+
+                        <div class="step-item pending">
+                            <strong>الخطوة 2 — إنشاء طلب توقيع الشهادة (CSR)</strong>
+                            <p class="mb-0 small text-muted">أنشئ زوج مفاتيح ECDSA-secp256k1 وطلب توقيع شهادة يحتوي على بيانات الجهاز.</p>
+                            <button class="btn btn-sm btn-outline-primary mt-2" onclick="generateDemoCsr()">
+                                <i class="bi bi-gear"></i> توليد CSR تجريبي
+                            </button>
+                        </div>
+
+                        <div class="step-item pending">
+                            <strong>الخطوة 3 — الحصول على رمز OTP من البوابة</strong>
+                            <p class="mb-0 small text-muted">سجّل في بوابة فاتورة → الامتثال → توليد رمز OTP. لبيئة الاختبار استخدم: 123456</p>
+                        </div>
+
+                        <div class="step-item pending">
+                            <strong>الخطوة 4 — الحصول على شهادة الامتثال (Compliance CSID)</strong>
+                            <p class="mb-0 small text-muted">أرسل CSR و OTP إلى نقطة النهاية <code>/compliance</code>. خزّن الشهادة والسر المستلمين.</p>
+                            <button class="btn btn-sm btn-outline-primary mt-2" onclick="simulateCsidRequest()">
+                                <i class="bi bi-cloud-arrow-up"></i> محاكاة طلب الشهادة
+                            </button>
+                        </div>
+
+                        <div class="step-item pending">
+                            <strong>الخطوة 5 — اجتياز 6 اختبارات امتثال</strong>
+                            <p class="mb-0 small text-muted">أرسل: فاتورة ضريبية، فاتورة مبسطة، إشعار دائن ضريبي، إشعار مدين ضريبي، إشعار دائن مبسط، إشعار مدين مبسط.</p>
+                        </div>
+
+                        <div class="step-item pending">
+                            <strong>الخطوة 6 — الحصول على شهادة الإنتاج (Production CSID)</strong>
+                            <p class="mb-0 small text-muted">بعد اجتياز الاختبارات الستة، اطلب شهادة الإنتاج. يجب تجديدها قبل انتهاء صلاحيتها.</p>
+                        </div>
+
+                        <div class="step-item pending">
+                            <strong>الخطوة 7 — الانتقال إلى بيئة الإنتاج</strong>
+                            <p class="mb-0 small text-muted">قم بتحديث نقطة النهاية إلى <code dir="ltr">https://gw-fatoora.zatca.gov.sa/e-invoicing/core</code> وابدأ الإصدار الفعلي للفواتير.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== سجل العمليات ==================== -->
             <section id="page-logs" class="page-section">
                 <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-journal-text"></i> Audit Logs</span>
+                        <span><i class="bi bi-journal-text"></i> سجل العمليات (Audit Log)</span>
                         <button class="btn btn-sm btn-outline-danger" onclick="clearLogs()">
-                            <i class="bi bi-trash"></i> Clear
+                            <i class="bi bi-trash"></i> مسح
                         </button>
                     </div>
                     <div class="card-body">
@@ -642,10 +747,10 @@ body {
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Time</th>
-                                        <th>User</th>
-                                        <th>Action</th>
-                                        <th>Details</th>
+                                        <th>الوقت</th>
+                                        <th>المستخدم</th>
+                                        <th>الإجراء</th>
+                                        <th>التفاصيل</th>
                                     </tr>
                                 </thead>
                                 <tbody id="logsTable"></tbody>
@@ -653,7 +758,7 @@ body {
                         </div>
                         <div id="logsEmpty" class="empty-state">
                             <i class="bi bi-journal-text"></i>
-                            <p>No activity yet.</p>
+                            <p>لا يوجد نشاط بعد.</p>
                         </div>
                     </div>
                 </div>
@@ -664,194 +769,194 @@ body {
 </div>
 
 
-<!-- ==================== CUSTOMER MODAL ==================== -->
+<!-- ==================== نافذة العميل ==================== -->
 <div class="modal fade" id="customerModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Customer</h5>
+                <h5 class="modal-title">بيانات العميل</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="custId">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label">Name (English) *</label>
-                        <input type="text" class="form-control" id="custNameEn">
+                        <label class="form-label">الاسم (بالإنجليزية) *</label>
+                        <input type="text" class="form-control" id="custNameEn" dir="ltr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Name (Arabic)</label>
-                        <input type="text" class="form-control" id="custNameAr" dir="rtl">
+                        <label class="form-label">الاسم (بالعربية)</label>
+                        <input type="text" class="form-control" id="custNameAr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">VAT Number</label>
-                        <input type="text" class="form-control" id="custVat" maxlength="15">
+                        <label class="form-label">الرقم الضريبي</label>
+                        <input type="text" class="form-control" id="custVat" maxlength="15" dir="ltr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">CRN</label>
-                        <input type="text" class="form-control" id="custCrn">
+                        <label class="form-label">السجل التجاري</label>
+                        <input type="text" class="form-control" id="custCrn" dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Building #</label>
-                        <input type="text" class="form-control" id="custBuilding" maxlength="4">
+                        <label class="form-label">رقم المبنى</label>
+                        <input type="text" class="form-control" id="custBuilding" maxlength="4" dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Street</label>
+                        <label class="form-label">الشارع</label>
                         <input type="text" class="form-control" id="custStreet">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">District</label>
+                        <label class="form-label">الحي</label>
                         <input type="text" class="form-control" id="custDistrict">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">City</label>
+                        <label class="form-label">المدينة</label>
                         <input type="text" class="form-control" id="custCity">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Postal Code</label>
-                        <input type="text" class="form-control" id="custPostal" maxlength="5">
+                        <label class="form-label">الرمز البريدي</label>
+                        <input type="text" class="form-control" id="custPostal" maxlength="5" dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Country</label>
-                        <input type="text" class="form-control" id="custCountry" value="SA">
+                        <label class="form-label">الدولة</label>
+                        <input type="text" class="form-control" id="custCountry" value="SA" dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="custEmail">
+                        <label class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="custEmail" dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="custPhone">
+                        <label class="form-label">الهاتف</label>
+                        <input type="text" class="form-control" id="custPhone" dir="ltr">
                     </div>
                     <div class="col-md-12">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="custVatReg">
-                            <label class="form-check-label" for="custVatReg">VAT Registered Customer</label>
+                            <label class="form-check-label" for="custVatReg">عميل مسجل في ضريبة القيمة المضافة</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" onclick="saveCustomer()">Save Customer</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveCustomer()">حفظ العميل</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ==================== PRODUCT MODAL ==================== -->
+<!-- ==================== نافذة المنتج ==================== -->
 <div class="modal fade" id="productModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Product / Service</h5>
+                <h5 class="modal-title">بيانات المنتج / الخدمة</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="prodId">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label">Name (English) *</label>
-                        <input type="text" class="form-control" id="prodNameEn">
+                        <label class="form-label">الاسم (بالإنجليزية) *</label>
+                        <input type="text" class="form-control" id="prodNameEn" dir="ltr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Name (Arabic)</label>
-                        <input type="text" class="form-control" id="prodNameAr" dir="rtl">
+                        <label class="form-label">الاسم (بالعربية)</label>
+                        <input type="text" class="form-control" id="prodNameAr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">SKU</label>
-                        <input type="text" class="form-control" id="prodSku">
+                        <label class="form-label">رمز المنتج (SKU)</label>
+                        <input type="text" class="form-control" id="prodSku" dir="ltr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Unit</label>
+                        <label class="form-label">الوحدة</label>
                         <select class="form-select" id="prodUnit">
-                            <option value="PCE">Piece (PCE)</option>
-                            <option value="KG">Kilogram (KG)</option>
-                            <option value="MTR">Meter (MTR)</option>
-                            <option value="LTR">Liter (LTR)</option>
-                            <option value="BOX">Box (BOX)</option>
+                            <option value="PCE">قطعة</option>
+                            <option value="KG">كيلوجرام</option>
+                            <option value="MTR">متر</option>
+                            <option value="LTR">لتر</option>
+                            <option value="BOX">صندوق</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Unit Price (SAR) *</label>
-                        <input type="number" step="0.01" class="form-control" id="prodPrice" value="0.00">
+                        <label class="form-label">سعر الوحدة (ر.س) *</label>
+                        <input type="number" step="0.01" class="form-control" id="prodPrice" value="0.00" dir="ltr">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">VAT Category</label>
+                        <label class="form-label">فئة الضريبة</label>
                         <select class="form-select" id="prodCategory" onchange="onVatCategoryChange()">
-                            <option value="S">Standard (15%)</option>
-                            <option value="Z">Zero Rated (0%)</option>
-                            <option value="E">Exempt</option>
-                            <option value="O">Out of Scope</option>
+                            <option value="S">قياسية (15%)</option>
+                            <option value="Z">صفري (0%)</option>
+                            <option value="E">معفاة</option>
+                            <option value="O">خارج نطاق الضريبة</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">VAT Rate (%)</label>
-                        <input type="number" step="0.01" class="form-control" id="prodVat" value="15.00">
+                        <label class="form-label">نسبة الضريبة (%)</label>
+                        <input type="number" step="0.01" class="form-control" id="prodVat" value="15.00" dir="ltr">
                     </div>
                     <div class="col-md-12">
-                        <label class="form-label">Description</label>
+                        <label class="form-label">الوصف</label>
                         <textarea class="form-control" id="prodDesc" rows="2"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveProduct()">حفظ المنتج</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ==================== INVOICE MODAL ==================== -->
+<!-- ==================== نافذة الفاتورة ==================== -->
 <div class="modal fade" id="invoiceModal" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Invoice</h5>
+                <h5 class="modal-title">إنشاء فاتورة جديدة</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="row g-3 mb-3">
                     <div class="col-md-3">
-                        <label class="form-label">Invoice Type *</label>
+                        <label class="form-label">نوع الفاتورة *</label>
                         <select class="form-select" id="invType">
-                            <option value="standard">Standard Tax Invoice (B2B)</option>
-                            <option value="simplified">Simplified Tax Invoice (B2C)</option>
-                            <option value="credit_note">Credit Note</option>
-                            <option value="debit_note">Debit Note</option>
+                            <option value="standard">فاتورة ضريبية (B2B)</option>
+                            <option value="simplified">فاتورة ضريبية مبسطة (B2C)</option>
+                            <option value="credit_note">إشعار دائن</option>
+                            <option value="debit_note">إشعار مدين</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Invoice Number</label>
-                        <input type="text" class="form-control" id="invNumber" readonly>
+                        <label class="form-label">رقم الفاتورة</label>
+                        <input type="text" class="form-control" id="invNumber" readonly dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Issue Date</label>
-                        <input type="date" class="form-control" id="invDate">
+                        <label class="form-label">تاريخ الإصدار</label>
+                        <input type="date" class="form-control" id="invDate" dir="ltr">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Currency</label>
-                        <input type="text" class="form-control" id="invCurrency" value="SAR" readonly>
+                        <label class="form-label">العملة</label>
+                        <input type="text" class="form-control" id="invCurrency" value="SAR" readonly dir="ltr">
                     </div>
                     <div class="col-md-12">
-                        <label class="form-label">Customer *</label>
+                        <label class="form-label">العميل *</label>
                         <select class="form-select" id="invCustomer"></select>
                     </div>
                 </div>
 
-                <h6 class="text-muted">Line Items</h6>
+                <h6 class="text-muted">بنود الفاتورة</h6>
                 <div class="table-responsive">
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th style="width:30%">Description</th>
-                                <th style="width:10%">Qty</th>
-                                <th style="width:10%">Unit</th>
-                                <th style="width:12%">Unit Price</th>
-                                <th style="width:10%">Discount</th>
-                                <th style="width:10%">VAT %</th>
-                                <th style="width:12%">Total</th>
+                                <th style="width:30%">الوصف</th>
+                                <th style="width:10%">الكمية</th>
+                                <th style="width:10%">الوحدة</th>
+                                <th style="width:12%">سعر الوحدة</th>
+                                <th style="width:10%">الخصم</th>
+                                <th style="width:10%">نسبة الضريبة</th>
+                                <th style="width:12%">الإجمالي</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -859,55 +964,68 @@ body {
                     </table>
                 </div>
                 <button class="btn btn-sm btn-outline-primary" onclick="addInvoiceLine()">
-                    <i class="bi bi-plus"></i> Add Line
+                    <i class="bi bi-plus"></i> إضافة بند
                 </button>
 
                 <hr>
 
-                <div class="row justify-content-end">
+                <div class="row justify-content-start">
                     <div class="col-md-5">
                         <table class="table table-sm">
-                            <tr><td>Subtotal (excl. VAT)</td><td class="text-end" id="invSubtotal">0.00</td></tr>
-                            <tr><td>Total VAT</td><td class="text-end" id="invVatTotal">0.00</td></tr>
-                            <tr class="invoice-total-row"><td>Total (incl. VAT)</td><td class="text-end" id="invGrandTotal">0.00</td></tr>
+                            <tr><td>المجموع قبل الضريبة</td><td class="text-start" id="invSubtotal">0.00</td></tr>
+                            <tr><td>إجمالي الضريبة</td><td class="text-start" id="invVatTotal">0.00</td></tr>
+                            <tr class="invoice-total-row"><td>الإجمالي شامل الضريبة</td><td class="text-start" id="invGrandTotal">0.00</td></tr>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" onclick="saveInvoice()">Save Invoice</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveInvoice()">حفظ الفاتورة</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ==================== CHANGE PASSWORD MODAL ==================== -->
+<!-- ==================== نافذة عرض الفاتورة ==================== -->
+<div class="modal fade" id="viewInvoiceModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewInvoiceTitle">تفاصيل الفاتورة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="viewInvoiceBody"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== نافذة تغيير كلمة المرور ==================== -->
 <div class="modal fade" id="pwModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Change Password</h5>
+                <h5 class="modal-title">تغيير كلمة المرور</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div id="pwModalAlert" class="alert-custom"></div>
                 <div class="mb-3">
-                    <label class="form-label">Current Password</label>
+                    <label class="form-label">كلمة المرور الحالية</label>
                     <input type="password" class="form-control" id="pwCurrent">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">New Password</label>
+                    <label class="form-label">كلمة المرور الجديدة</label>
                     <input type="password" class="form-control" id="pwNew" minlength="8">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Confirm New Password</label>
+                    <label class="form-label">تأكيد كلمة المرور الجديدة</label>
                     <input type="password" class="form-control" id="pwConfirm">
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" onclick="savePassword()">Save</button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button class="btn btn-primary" onclick="savePassword()">حفظ</button>
             </div>
         </div>
     </div>
@@ -917,18 +1035,18 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 /* ============================================================
-   ZATCA PHASE 2 — STANDALONE DEMO
-   All data persisted in localStorage.
-   Default login: admin / Admin@123
+   نظام الفاتورة الإلكترونية — المرحلة 1 و 2
+   نسخة تجريبية — البيانات محفوظة في المتصفح (localStorage)
+   بيانات الدخول الافتراضية: admin / Admin@123
    ============================================================ */
 
 const DEFAULT_USER = 'admin';
 const DEFAULT_PASS = 'Admin@123';
 
-let customerModal, productModal, invoiceModal, pwModal;
+let customerModal, productModal, invoiceModal, viewInvoiceModal, pwModal;
 let editingInvoiceLines = [];
 
-// ==================== STORAGE ====================
+// ==================== التخزين ====================
 const DB = {
     get(key, fallback) {
         try { return JSON.parse(localStorage.getItem('zatca_' + key)) ?? fallback; }
@@ -951,16 +1069,16 @@ function clearSession() { DB.del('session'); }
 function logAction(action, details = '') {
     const logs = DB.get('logs', []);
     logs.unshift({
-        time: new Date().toLocaleString(),
-        user: getSession() || 'system',
+        time: new Date().toLocaleString('ar-SA'),
+        user: getSession() || 'النظام',
         action,
         details
     });
-    DB.set('logs', logs.slice(0, 200));
+    DB.set('logs', logs.slice(0, 300));
     if (document.getElementById('logsTable')) renderLogs();
 }
 
-// ==================== AUTH ====================
+// ==================== تسجيل الدخول ====================
 function handleLogin(e) {
     e.preventDefault();
     const alertEl = document.getElementById('loginAlert');
@@ -970,19 +1088,19 @@ function handleLogin(e) {
     const users = getUsers();
     if (users[username] && users[username] === password) {
         setSession(username);
-        logAction('LOGIN', 'Successful login');
+        logAction('LOGIN', 'تم تسجيل الدخول بنجاح');
         document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('appPage').classList.remove('hidden');
         document.getElementById('navUsername').textContent = username;
         refreshAll();
     } else {
-        alertEl.textContent = 'Invalid username or password.';
+        alertEl.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة.';
         alertEl.className = 'alert-custom alert-error show';
     }
 }
 
 function handleLogout() {
-    logAction('LOGOUT', 'User logged out');
+    logAction('LOGOUT', 'تم تسجيل الخروج');
     clearSession();
     document.getElementById('appPage').classList.add('hidden');
     document.getElementById('loginPage').classList.remove('hidden');
@@ -1006,30 +1124,30 @@ function savePassword() {
     const users = getUsers();
 
     if (users[user] !== cur) {
-        alertEl.textContent = 'Current password is incorrect.';
+        alertEl.textContent = 'كلمة المرور الحالية غير صحيحة.';
         alertEl.className = 'alert-custom alert-error show';
         return;
     }
     if (nw.length < 8) {
-        alertEl.textContent = 'Password must be at least 8 characters.';
+        alertEl.textContent = 'يجب أن تكون كلمة المرور 8 أحرف على الأقل.';
         alertEl.className = 'alert-custom alert-error show';
         return;
     }
     if (nw !== cf) {
-        alertEl.textContent = 'New passwords do not match.';
+        alertEl.textContent = 'كلمتا المرور الجديدتان غير متطابقتين.';
         alertEl.className = 'alert-custom alert-error show';
         return;
     }
 
     users[user] = nw;
     saveUsers(users);
-    logAction('PASSWORD_CHANGED', 'Password changed');
-    alertEl.textContent = 'Password changed successfully.';
+    logAction('PASSWORD_CHANGED', 'تم تغيير كلمة المرور');
+    alertEl.textContent = 'تم تغيير كلمة المرور بنجاح.';
     alertEl.className = 'alert-custom alert-success show';
     setTimeout(() => pwModal.hide(), 1200);
 }
 
-// ==================== NAV ====================
+// ==================== التنقل ====================
 function switchPage(page, el) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
     document.getElementById('page-' + page).classList.add('active');
@@ -1038,13 +1156,14 @@ function switchPage(page, el) {
     if (el) el.classList.add('active');
 
     const titles = {
-        dashboard: 'Dashboard',
-        company: 'Company Profile',
-        customers: 'Customers',
-        products: 'Products / Services',
-        invoices: 'Invoices',
-        zatca: 'ZATCA Settings',
-        logs: 'Audit Logs'
+        dashboard: 'لوحة التحكم',
+        company: 'بيانات المنشأة',
+        customers: 'العملاء',
+        products: 'المنتجات / الخدمات',
+        invoices: 'الفواتير',
+        zatca: 'إعدادات الهيئة',
+        onboarding: 'التسجيل الإلكتروني',
+        logs: 'سجل العمليات'
     };
     document.getElementById('pageTitle').textContent = titles[page] || page;
 
@@ -1054,26 +1173,26 @@ function switchPage(page, el) {
     if (page === 'logs') renderLogs();
     if (page === 'company') loadCompany();
     if (page === 'zatca') loadZatca();
+    if (page === 'dashboard') refreshDashboard();
 }
 
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('open');
 }
 
-// ==================== DASHBOARD ====================
+// ==================== لوحة التحكم ====================
 function refreshDashboard() {
     const invoices = DB.get('invoices', []);
     const customers = DB.get('customers', []);
 
-    let cleared = 0, reported = 0, pending = 0, rejected = 0, failed = 0;
+    let cleared = 0, reported = 0, pending = 0, rejected = 0;
     let totalSales = 0, totalVat = 0;
 
     invoices.forEach(i => {
         if (i.status === 'cleared') cleared++;
         else if (i.status === 'reported') reported++;
-        else if (i.status === 'draft' || i.status === 'pending') pending++;
-        else if (i.status === 'rejected') rejected++;
-        else if (i.status === 'failed') failed++;
+        else if (i.status === 'draft' || i.status === 'pending' || i.status === 'generated') pending++;
+        else if (i.status === 'rejected' || i.status === 'failed') rejected++;
 
         totalSales += Number(i.total || 0);
         totalVat += Number(i.vat || 0);
@@ -1087,9 +1206,27 @@ function refreshDashboard() {
     document.getElementById('statSales').textContent = totalSales.toFixed(2);
     document.getElementById('statVat').textContent = totalVat.toFixed(2);
     document.getElementById('statCustomers').textContent = customers.length;
+
+    const company = DB.get('company', {});
+    const zatca = DB.get('zatca', {});
+    const statuses = [
+        { label: 'بيانات المنشأة', ok: !!(company.vat && company.legalEn), text: company.legalEn || 'غير مُعدّة' },
+        { label: 'البيئة', ok: true, text: zatca.env === 'production' ? 'الإنتاج' : zatca.env === 'simulation' ? 'المحاكاة' : 'الاختبار' },
+        { label: 'الشهادة (CSID)', ok: !!zatca.complianceCsid, text: zatca.complianceCsid ? 'مُعدّة' : 'غير مُعدّة' }
+    ];
+
+    document.getElementById('systemStatus').innerHTML = statuses.map(s => `
+        <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <div>
+                <span class="info-badge ${s.ok ? 'bg-success' : 'bg-warning'} text-white">${s.ok ? 'جاهز' : 'معلّق'}</span>
+                <strong class="ms-2 me-2">${s.label}</strong>
+            </div>
+            <span class="text-muted small">${esc(s.text)}</span>
+        </div>
+    `).join('');
 }
 
-// ==================== COMPANY ====================
+// ==================== بيانات المنشأة ====================
 function loadCompany() {
     const c = DB.get('company', {});
     document.getElementById('cLegalEn').value = c.legalEn || '';
@@ -1128,19 +1265,19 @@ function saveCompany() {
     };
 
     if (!data.legalEn || !data.legalAr || !data.vat) {
-        alertEl.textContent = 'Legal names (EN/AR) and VAT number are required.';
+        alertEl.textContent = 'الاسم القانوني (عربي وإنجليزي) والرقم الضريبي مطلوبة.';
         alertEl.className = 'alert-custom alert-error show';
         return;
     }
 
     DB.set('company', data);
     logAction('COMPANY_SAVED', data.legalEn);
-    alertEl.textContent = 'Company profile saved successfully.';
+    alertEl.textContent = 'تم حفظ بيانات المنشأة بنجاح.';
     alertEl.className = 'alert-custom alert-success show';
     setTimeout(() => alertEl.className = 'alert-custom', 3000);
 }
 
-// ==================== CUSTOMERS ====================
+// ==================== العملاء ====================
 function renderCustomers() {
     const list = DB.get('customers', []);
     const tbody = document.getElementById('customersTable');
@@ -1157,10 +1294,10 @@ function renderCustomers() {
         <tr>
             <td>${i + 1}</td>
             <td>${esc(c.nameEn)}</td>
-            <td dir="rtl">${esc(c.nameAr || '-')}</td>
-            <td>${esc(c.vat || '-')}</td>
+            <td>${esc(c.nameAr || '-')}</td>
+            <td dir="ltr" style="text-align:right">${esc(c.vat || '-')}</td>
             <td>${esc(c.city || '-')}</td>
-            <td>${c.vatReg ? '<span class="badge bg-success">VAT</span>' : '<span class="badge bg-secondary">Non-VAT</span>'}</td>
+            <td>${c.vatReg ? '<span class="badge bg-success">مسجل ضريبيًا</span>' : '<span class="badge bg-secondary">غير مسجل</span>'}</td>
             <td>
                 <button class="btn btn-sm btn-outline-primary" onclick="editCustomer(${i})"><i class="bi bi-pencil"></i></button>
                 <button class="btn btn-sm btn-outline-danger" onclick="deleteCustomer(${i})"><i class="bi bi-trash"></i></button>
@@ -1205,14 +1342,13 @@ function saveCustomer() {
     const vatReg = document.getElementById('custVatReg').checked;
     const vat = document.getElementById('custVat').value.trim();
 
-    if (!nameEn) { alert('Name is required.'); return; }
-    if (vatReg && !vat) { alert('VAT number is required for VAT-registered customers.'); return; }
+    if (!nameEn) { alert('الاسم مطلوب.'); return; }
+    if (vatReg && !vat) { alert('الرقم الضريبي مطلوب للعملاء المسجلين ضريبيًا.'); return; }
 
     const data = {
         nameEn,
         nameAr: document.getElementById('custNameAr').value.trim(),
-        vat,
-        crn: document.getElementById('custCrn').value.trim(),
+        vat, crn: document.getElementById('custCrn').value.trim(),
         building: document.getElementById('custBuilding').value.trim(),
         street: document.getElementById('custStreet').value.trim(),
         district: document.getElementById('custDistrict').value.trim(),
@@ -1227,13 +1363,9 @@ function saveCustomer() {
     const list = DB.get('customers', []);
     const idx = document.getElementById('custId').value;
 
-    if (idx === '') {
-        list.push(data);
-        logAction('CUSTOMER_ADDED', data.nameEn);
-    } else {
-        list[Number(idx)] = data;
-        logAction('CUSTOMER_UPDATED', data.nameEn);
-    }
+    if (idx === '') { list.push(data); logAction('CUSTOMER_ADDED', data.nameEn); }
+    else { list[Number(idx)] = data; logAction('CUSTOMER_UPDATED', data.nameEn); }
+
     DB.set('customers', list);
     customerModal.hide();
     renderCustomers();
@@ -1241,7 +1373,7 @@ function saveCustomer() {
 }
 
 function deleteCustomer(idx) {
-    if (!confirm('Delete this customer?')) return;
+    if (!confirm('هل تريد حذف هذا العميل؟')) return;
     const list = DB.get('customers', []);
     const removed = list.splice(idx, 1)[0];
     DB.set('customers', list);
@@ -1250,7 +1382,7 @@ function deleteCustomer(idx) {
     refreshDashboard();
 }
 
-// ==================== PRODUCTS ====================
+// ==================== المنتجات ====================
 function renderProducts() {
     const list = DB.get('products', []);
     const tbody = document.getElementById('productsTable');
@@ -1313,7 +1445,7 @@ function editProduct(idx) {
 
 function saveProduct() {
     const nameEn = document.getElementById('prodNameEn').value.trim();
-    if (!nameEn) { alert('Name is required.'); return; }
+    if (!nameEn) { alert('الاسم مطلوب.'); return; }
 
     const data = {
         nameEn,
@@ -1338,7 +1470,7 @@ function saveProduct() {
 }
 
 function deleteProduct(idx) {
-    if (!confirm('Delete this product?')) return;
+    if (!confirm('هل تريد حذف هذا المنتج؟')) return;
     const list = DB.get('products', []);
     const removed = list.splice(idx, 1)[0];
     DB.set('products', list);
@@ -1346,7 +1478,7 @@ function deleteProduct(idx) {
     renderProducts();
 }
 
-// ==================== INVOICES ====================
+// ==================== الفواتير ====================
 function renderInvoices() {
     const list = DB.get('invoices', []);
     const tbody = document.getElementById('invoicesTable');
@@ -1360,27 +1492,30 @@ function renderInvoices() {
     empty.style.display = 'none';
 
     const statusBadge = {
-        draft: 'badge-draft',
-        generated: 'badge-generated',
-        pending: 'badge-pending',
-        cleared: 'badge-cleared',
-        reported: 'badge-reported',
-        rejected: 'badge-rejected',
-        failed: 'badge-failed'
+        draft: 'badge-draft', generated: 'badge-generated', validated: 'badge-validated',
+        pending: 'badge-pending', cleared: 'badge-cleared', reported: 'badge-reported',
+        rejected: 'badge-rejected', failed: 'badge-failed'
+    };
+
+    const statusAr = {
+        draft: 'مسودة', generated: 'مُولّدة', validated: 'مُتحقّق منها',
+        pending: 'معلقة', cleared: 'معتمدة', reported: 'مُبلّغ عنها',
+        rejected: 'مرفوضة', failed: 'فاشلة'
     };
 
     tbody.innerHTML = list.map((inv, i) => `
         <tr>
-            <td>${esc(inv.number)}</td>
+            <td dir="ltr" style="text-align:right">${esc(inv.number)}</td>
             <td>${formatType(inv.type)}</td>
             <td>${esc(inv.date)}</td>
             <td>${esc(inv.customerName || '-')}</td>
             <td>${Number(inv.total || 0).toFixed(2)}</td>
             <td>${Number(inv.vat || 0).toFixed(2)}</td>
-            <td><span class="badge ${statusBadge[inv.status] || 'bg-secondary'}">${inv.status}</span></td>
+            <td><span class="badge ${statusBadge[inv.status] || 'bg-secondary'}">${statusAr[inv.status] || inv.status}</span></td>
             <td>
-                <button class="btn btn-sm btn-outline-info" onclick="viewInvoice(${i})"><i class="bi bi-eye"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="deleteInvoice(${i})"><i class="bi bi-trash"></i></button>
+                <button class="btn btn-sm btn-outline-info" onclick="viewInvoice(${i})" title="عرض"><i class="bi bi-eye"></i></button>
+                <button class="btn btn-sm btn-outline-success" onclick="processInvoice(${i})" title="إرسال للهيئة"><i class="bi bi-cloud-arrow-up"></i></button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteInvoice(${i})" title="حذف"><i class="bi bi-trash"></i></button>
             </td>
         </tr>
     `).join('');
@@ -1388,10 +1523,10 @@ function renderInvoices() {
 
 function formatType(t) {
     return {
-        standard: 'Standard',
-        simplified: 'Simplified',
-        credit_note: 'Credit Note',
-        debit_note: 'Debit Note'
+        standard: 'فاتورة ضريبية',
+        simplified: 'فاتورة مبسطة',
+        credit_note: 'إشعار دائن',
+        debit_note: 'إشعار مدين'
     }[t] || t;
 }
 
@@ -1399,24 +1534,20 @@ function openInvoiceModal() {
     editingInvoiceLines = [];
     const company = DB.get('company', {});
     if (!company.vat) {
-        alert('Please fill in the Company Profile first (VAT number required).');
+        alert('يرجى إكمال بيانات المنشأة أولاً (الرقم الضريبي مطلوب).');
         return;
     }
 
-    // Auto invoice number
     const invoices = DB.get('invoices', []);
     const nextNum = 'INV-' + String(invoices.length + 1).padStart(6, '0');
     document.getElementById('invNumber').value = nextNum;
-
-    // Today's date
     document.getElementById('invDate').value = new Date().toISOString().slice(0, 10);
     document.getElementById('invType').value = 'standard';
 
-    // Load customers
     const custSelect = document.getElementById('invCustomer');
     const customers = DB.get('customers', []);
-    custSelect.innerHTML = '<option value="">-- Select Customer --</option>' +
-        customers.map((c, i) => `<option value="${i}">${esc(c.nameEn)}${c.vat ? ' (VAT: ' + c.vat + ')' : ''}</option>`).join('');
+    custSelect.innerHTML = '<option value="">-- اختر عميلاً --</option>' +
+        customers.map((c, i) => `<option value="${i}">${esc(c.nameEn)}${c.vat ? ' (رقم ضريبي: ' + c.vat + ')' : ''}</option>`).join('');
 
     document.getElementById('invItemsBody').innerHTML = '';
     addInvoiceLine();
@@ -1425,7 +1556,6 @@ function openInvoiceModal() {
 }
 
 function addInvoiceLine() {
-    const idx = editingInvoiceLines.length;
     editingInvoiceLines.push({ desc: '', qty: 1, unit: 'PCE', price: 0, discount: 0, vat: 15 });
     renderInvoiceLines();
 }
@@ -1439,7 +1569,7 @@ function renderInvoiceLines() {
             <td>
                 <input type="text" class="form-control form-control-sm" value="${esc(line.desc)}"
                        oninput="updateLine(${i}, 'desc', this.value)"
-                       list="productList${i}" placeholder="Description">
+                       list="productList${i}" placeholder="وصف البند">
                 <datalist id="productList${i}">
                     ${products.map(p => `<option value="${esc(p.nameEn)}">${esc(p.price)}</option>`).join('')}
                 </datalist>
@@ -1447,14 +1577,14 @@ function renderInvoiceLines() {
             <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.qty}"
                        oninput="updateLine(${i}, 'qty', this.value)"></td>
             <td><input type="text" class="form-control form-control-sm" value="${esc(line.unit)}"
-                       oninput="updateLine(${i}, 'unit', this.value)"></td>
+                       oninput="updateLine(${i}, 'unit', this.value)" dir="ltr"></td>
             <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.price}"
                        oninput="updateLine(${i}, 'price', this.value)"></td>
             <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.discount}"
                        oninput="updateLine(${i}, 'discount', this.value)"></td>
             <td><input type="number" step="0.01" class="form-control form-control-sm" value="${line.vat}"
                        oninput="updateLine(${i}, 'vat', this.value)"></td>
-            <td class="text-end"><span id="lineTotal${i}">0.00</span></td>
+            <td class="text-start"><span id="lineTotal${i}">0.00</span></td>
             <td><button class="btn btn-sm btn-outline-danger" onclick="removeLine(${i})"><i class="bi bi-x"></i></button></td>
         </tr>
     `).join('');
@@ -1494,8 +1624,8 @@ function saveInvoice() {
     const custIdx = document.getElementById('invCustomer').value;
     const date = document.getElementById('invDate').value;
 
-    if (custIdx === '') { alert('Please select a customer.'); return; }
-    if (editingInvoiceLines.length === 0) { alert('Add at least one line item.'); return; }
+    if (custIdx === '') { alert('يرجى اختيار العميل.'); return; }
+    if (editingInvoiceLines.length === 0) { alert('أضف بندًا واحدًا على الأقل.'); return; }
 
     const customers = DB.get('customers', []);
     const customer = customers[Number(custIdx)];
@@ -1517,6 +1647,9 @@ function saveInvoice() {
         vat,
         total: subtotal + vat,
         status: 'draft',
+        hash: null,
+        qr: null,
+        xml: null,
         createdAt: new Date().toISOString()
     };
 
@@ -1534,6 +1667,7 @@ function viewInvoice(idx) {
     const inv = DB.get('invoices', [])[idx];
     if (!inv) return;
 
+    const company = DB.get('company', {});
     const lines = inv.lines.map(l => {
         const base = l.qty * l.price - (l.discount || 0);
         const v = base * l.vat / 100;
@@ -1548,51 +1682,207 @@ function viewInvoice(idx) {
         </tr>`;
     }).join('');
 
-    const html = `
-        <div class="p-3">
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <h5>${esc(inv.number)}</h5>
-                    <p class="text-muted mb-1">Type: ${formatType(inv.type)}</p>
-                    <p class="text-muted mb-1">UUID: ${esc(inv.uuid)}</p>
-                    <p class="text-muted mb-1">Date: ${esc(inv.date)} ${esc(inv.time || '')}</p>
+    const statusBadge = {
+        draft: 'badge-draft', generated: 'badge-generated', validated: 'badge-validated',
+        pending: 'badge-pending', cleared: 'badge-cleared', reported: 'badge-reported',
+        rejected: 'badge-rejected', failed: 'badge-failed'
+    };
+
+    const statusAr = {
+        draft: 'مسودة', generated: 'مُولّدة', validated: 'مُتحقّق منها',
+        pending: 'معلقة', cleared: 'معتمدة', reported: 'مُبلّغ عنها',
+        rejected: 'مرفوضة', failed: 'فاشلة'
+    };
+
+    document.getElementById('viewInvoiceTitle').textContent = inv.number;
+
+    document.getElementById('viewInvoiceBody').innerHTML = `
+        <ul class="nav nav-tabs mb-3" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-preview">المعاينة</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-xml">ملف XML</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-qr">رمز QR</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-api">استجابة API</button></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab-preview">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6>${esc(company.legalAr || company.legalEn || 'البائع')}</h6>
+                        <p class="text-muted small mb-1">الرقم الضريبي: ${esc(company.vat || '-')}</p>
+                        <p class="text-muted small mb-1">${esc(company.street || '')}، ${esc(company.city || '')}</p>
+                    </div>
+                    <div class="col-md-6 text-start">
+                        <h6>${esc(inv.customerName)}</h6>
+                        <p class="text-muted small mb-1">الرقم الضريبي: ${esc(inv.customerVat || '-')}</p>
+                        <p class="mb-1"><strong>رقم الفاتورة:</strong> ${esc(inv.number)}</p>
+                        <p class="mb-1"><strong>المُعرّف الفريد:</strong> <small dir="ltr">${esc(inv.uuid)}</small></p>
+                        <p class="mb-1"><strong>التاريخ:</strong> ${esc(inv.date)} ${esc(inv.time || '')}</p>
+                        <p class="mb-1"><span class="badge ${statusBadge[inv.status]}">${statusAr[inv.status] || inv.status}</span></p>
+                    </div>
                 </div>
-                <div class="col-md-6 text-end">
-                    <p class="mb-1"><strong>Customer:</strong> ${esc(inv.customerName)}</p>
-                    <p class="mb-1"><strong>VAT:</strong> ${esc(inv.customerVat || '-')}</p>
-                    <p class="mb-1"><strong>Status:</strong> <span class="badge bg-secondary">${inv.status}</span></p>
+                <table class="table table-sm">
+                    <thead>
+                        <tr><th>الوصف</th><th>الكمية</th><th>الوحدة</th><th>السعر</th><th>الخصم</th><th>الضريبة</th><th>الإجمالي</th></tr>
+                    </thead>
+                    <tbody>${lines}</tbody>
+                </table>
+                <div class="row justify-content-start">
+                    <div class="col-md-5">
+                        <table class="table table-sm">
+                            <tr><td>المجموع قبل الضريبة</td><td class="text-start">${Number(inv.subtotal).toFixed(2)}</td></tr>
+                            <tr><td>الضريبة</td><td class="text-start">${Number(inv.vat).toFixed(2)}</td></tr>
+                            <tr class="invoice-total-row"><td>الإجمالي</td><td class="text-start">${Number(inv.total).toFixed(2)} ر.س</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <table class="table table-sm">
-                <thead>
-                    <tr><th>Description</th><th>Qty</th><th>Unit</th><th>Price</th><th>Discount</th><th>VAT</th><th>Total</th></tr>
-                </thead>
-                <tbody>${lines}</tbody>
-            </table>
-            <div class="row justify-content-end">
-                <div class="col-md-5">
-                    <table class="table table-sm">
-                        <tr><td>Subtotal</td><td class="text-end">${Number(inv.subtotal).toFixed(2)}</td></tr>
-                        <tr><td>VAT</td><td class="text-end">${Number(inv.vat).toFixed(2)}</td></tr>
-                        <tr class="invoice-total-row"><td>Total</td><td class="text-end">${Number(inv.total).toFixed(2)} SAR</td></tr>
-                    </table>
-                </div>
+
+            <div class="tab-pane fade" id="tab-xml">
+                <p class="text-muted small">معاينة XML وفق UBL 2.1 — يتم توليدها عند الإرسال.</p>
+                <div class="code-block" id="xmlPreview">${esc(inv.xml || 'اضغط "توليد XML" بالأسفل لبناء ملف XML متوافق مع الهيئة.')}</div>
+                <button class="btn btn-sm btn-primary mt-2" onclick="generateXml(${idx})">
+                    <i class="bi bi-filetype-xml"></i> توليد XML
+                </button>
             </div>
-            <div class="alert alert-info small mt-3">
-                <strong>Next steps (Stage 4+):</strong> Generate ZATCA XML, compute hash, sign with CSID, generate TLV QR, and submit to Fatoora API for clearance/reporting.
+
+            <div class="tab-pane fade" id="tab-qr">
+                <p class="text-muted small">رمز QR مُرمّز بصيغة TLV-Base64 (صيغة المرحلة الثانية من الهيئة).</p>
+                <div class="qr-preview" id="qrPreview">
+                    ${inv.qr ? '<p class="mb-2"><strong>بيانات TLV:</strong></p><div class="code-block">' + esc(inv.qr) + '</div>' : 'سيتم توليد رمز QR مع ملف XML.'}
+                </div>
+                <button class="btn btn-sm btn-primary mt-2" onclick="generateQr(${idx})">
+                    <i class="bi bi-qr-code"></i> توليد رمز QR
+                </button>
+            </div>
+
+            <div class="tab-pane fade" id="tab-api">
+                <p class="text-muted small">آخر استجابة تم استلامها من واجهة فاتورة.</p>
+                <div class="code-block">${esc(inv.apiResponse || 'لا يوجد إرسال بعد. اضغط "إرسال للهيئة" من قائمة الفواتير.')}</div>
             </div>
         </div>
     `;
 
-    const w = window.open('', '_blank');
-    w.document.write(`<html><head><title>${inv.number}</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        </head><body>${html}</body></html>`);
-    w.document.close();
+    viewInvoiceModal.show();
+}
+
+function generateXml(idx) {
+    const inv = DB.get('invoices', [])[idx];
+    const company = DB.get('company', {});
+    if (!inv) return;
+
+    const xml = buildUBLXml(inv, company);
+    inv.xml = xml;
+    inv.hash = computeSimpleHash(xml);
+    inv.status = 'generated';
+
+    const invoices = DB.get('invoices', []);
+    invoices[idx] = inv;
+    DB.set('invoices', invoices);
+
+    logAction('XML_GENERATED', inv.number);
+    document.getElementById('xmlPreview').textContent = xml;
+    renderInvoices();
+    refreshDashboard();
+}
+
+function generateQr(idx) {
+    const inv = DB.get('invoices', [])[idx];
+    const company = DB.get('company', {});
+    if (!inv) return;
+
+    const qr = buildTlvQr(inv, company);
+    inv.qr = qr;
+    const invoices = DB.get('invoices', []);
+    invoices[idx] = inv;
+    DB.set('invoices', invoices);
+
+    logAction('QR_GENERATED', inv.number);
+    document.getElementById('qrPreview').innerHTML = `
+        <p class="mb-2"><strong>بيانات TLV (Base64):</strong></p>
+        <div class="code-block">${esc(qr)}</div>
+        <p class="small text-muted mt-2">يجب تحويل هذه السلسلة إلى صورة QR عبر نظام نقاط البيع أو الطباعة.</p>
+    `;
+}
+
+function processInvoice(idx) {
+    const inv = DB.get('invoices', [])[idx];
+    const company = DB.get('company', {});
+    const zatca = DB.get('zatca', {});
+
+    if (!inv) return;
+    if (!inv.xml) {
+        alert('يرجى توليد ملف XML أولاً (عرض ← تبويب XML ← توليد XML).');
+        return;
+    }
+    if (!zatca.complianceCsid) {
+        alert('لم يتم تكوين الشهادة. يرجى إكمال إعدادات الهيئة ومعالج التسجيل.');
+        return;
+    }
+
+    const isB2B = inv.type === 'standard' || inv.type === 'credit_note' || inv.type === 'debit_note';
+    const endpoint = isB2B ? 'clearance' : 'reporting';
+
+    inv.status = 'submitted';
+    inv.apiResponse = JSON.stringify({
+        status: 'SIMULATED',
+        endpoint,
+        timestamp: new Date().toISOString(),
+        requestId: 'sim-' + Date.now(),
+        note: 'استجابة محاكاة. الاتصال الفعلي بالهيئة يتطلب خادمًا معتمدًا بشهادة صالحة.'
+    }, null, 2);
+
+    setTimeout(() => {
+        const success = Math.random() > 0.15;
+        if (success) {
+            inv.status = isB2B ? 'cleared' : 'reported';
+            inv.apiResponse = JSON.stringify({
+                status: 'SUCCESS',
+                endpoint,
+                clearanceStatus: isB2B ? 'CLEARED' : 'REPORTED',
+                timestamp: new Date().toISOString(),
+                requestId: 'sim-' + Date.now(),
+                validationResults: {
+                    infoMessages: [],
+                    warningMessages: [],
+                    errorMessages: []
+                }
+            }, null, 2);
+            logAction('INVOICE_' + (isB2B ? 'CLEARED' : 'REPORTED'), inv.number);
+        } else {
+            inv.status = 'rejected';
+            inv.apiResponse = JSON.stringify({
+                status: 'ERROR',
+                endpoint,
+                clearanceStatus: 'NOT_CLEARED',
+                timestamp: new Date().toISOString(),
+                validationResults: {
+                    errorMessages: [{
+                        code: 'BR-KSA-F-06',
+                        message: 'رفض محاكاة لأغراض العرض.'
+                    }]
+                }
+            }, null, 2);
+            logAction('INVOICE_REJECTED', inv.number);
+        }
+
+        const invoices = DB.get('invoices', []);
+        invoices[idx] = inv;
+        DB.set('invoices', invoices);
+        renderInvoices();
+        refreshDashboard();
+    }, 1500);
+
+    const invoices = DB.get('invoices', []);
+    invoices[idx] = inv;
+    DB.set('invoices', invoices);
+
+    logAction('INVOICE_SUBMITTED', `${inv.number} → ${endpoint}`);
+    renderInvoices();
 }
 
 function deleteInvoice(idx) {
-    if (!confirm('Delete this invoice?')) return;
+    if (!confirm('هل تريد حذف هذه الفاتورة؟')) return;
     const invoices = DB.get('invoices', []);
     const removed = invoices.splice(idx, 1)[0];
     DB.set('invoices', invoices);
@@ -1601,35 +1891,270 @@ function deleteInvoice(idx) {
     refreshDashboard();
 }
 
-// ==================== ZATCA SETTINGS ====================
+// ==================== توليد XML (UBL 2.1) ====================
+function buildUBLXml(inv, company) {
+    const isB2B = inv.type === 'standard' || inv.type === 'credit_note' || inv.type === 'debit_note';
+    const invoiceTypeCode = inv.type === 'standard' ? '388' :
+                           inv.type === 'simplified' ? '388' :
+                           inv.type === 'credit_note' ? '381' : '383';
+
+    const lines = inv.lines.map((l, i) => {
+        const base = l.qty * l.price - (l.discount || 0);
+        const vat = base * l.vat / 100;
+        return `
+    <cac:InvoiceLine>
+        <cbc:ID>${i + 1}</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="${l.unit}">${l.qty}</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="SAR">${base.toFixed(2)}</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="SAR">${vat.toFixed(2)}</cbc:TaxAmount>
+            <cbc:RoundingAmount currencyID="SAR">${(base + vat).toFixed(2)}</cbc:RoundingAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Name>${escapeXml(l.desc)}</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>${l.vat > 0 ? 'S' : 'Z'}</cbc:ID>
+                <cbc:Percent>${l.vat.toFixed(2)}</cbc:Percent>
+                <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="SAR">${l.price.toFixed(2)}</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>`;
+    }).join('');
+
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <cbc:ProfileID>reporting:1.0</cbc:ProfileID>
+    <cbc:ID>${inv.number}</cbc:ID>
+    <cbc:UUID>${inv.uuid}</cbc:UUID>
+    <cbc:IssueDate>${inv.date}</cbc:IssueDate>
+    <cbc:IssueTime>${inv.time}</cbc:IssueTime>
+    <cbc:InvoiceTypeCode name="0100000">${invoiceTypeCode}</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
+    <cbc:TaxCurrencyCode>SAR</cbc:TaxCurrencyCode>
+
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>ICV</cbc:ID>
+        <cbc:UUID>${Date.now()}</cbc:UUID>
+    </cac:AdditionalDocumentReference>
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>PIH</cbc:ID>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject mimeCode="text/plain">NWZlY2ViNjZmZmM4NmYwYzY1ZmQ0MWM4NGQ3ZjRmNzI=</cbc:EmbeddedDocumentBinaryObject>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="CRN">${escapeXml(company.crn || '')}</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>${escapeXml(company.street || '')}</cbc:StreetName>
+                <cbc:BuildingNumber>${escapeXml(company.building || '')}</cbc:BuildingNumber>
+                <cbc:CitySubdivisionName>${escapeXml(company.district || '')}</cbc:CitySubdivisionName>
+                <cbc:CityName>${escapeXml(company.city || '')}</cbc:CityName>
+                <cbc:PostalZone>${escapeXml(company.postal || '')}</cbc:PostalZone>
+                <cac:Country><cbc:IdentificationCode>SA</cbc:IdentificationCode></cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>${escapeXml(company.vat || '')}</cbc:CompanyID>
+                <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>${escapeXml(company.legalAr || company.legalEn || '')}</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    ${isB2B ? `
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PostalAddress>
+                <cbc:StreetName>-</cbc:StreetName>
+                <cbc:BuildingNumber>-</cbc:BuildingNumber>
+                <cbc:CitySubdivisionName>-</cbc:CitySubdivisionName>
+                <cbc:CityName>-</cbc:CityName>
+                <cbc:PostalZone>-</cbc:PostalZone>
+                <cac:Country><cbc:IdentificationCode>SA</cbc:IdentificationCode></cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>${escapeXml(inv.customerVat || '')}</cbc:CompanyID>
+                <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>${escapeXml(inv.customerName || '')}</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>` : ''}
+
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="SAR">${inv.vat.toFixed(2)}</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="SAR">${inv.subtotal.toFixed(2)}</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="SAR">${inv.vat.toFixed(2)}</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>15.00</cbc:Percent>
+                <cac:TaxScheme><cbc:ID>VAT</cbc:ID></cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="SAR">${inv.subtotal.toFixed(2)}</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="SAR">${inv.subtotal.toFixed(2)}</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="SAR">${inv.total.toFixed(2)}</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="SAR">${inv.total.toFixed(2)}</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    ${lines}
+</Invoice>`;
+}
+
+// ==================== توليد QR (TLV) ====================
+function buildTlvQr(inv, company) {
+    function tlv(tag, value) {
+        const bytes = new TextEncoder().encode(value);
+        const len = bytes.length;
+        const tagByte = String.fromCharCode(tag);
+        const lenByte = String.fromCharCode(len);
+        let result = tagByte + lenByte;
+        for (const b of bytes) result += String.fromCharCode(b);
+        return result;
+    }
+
+    const timestamp = inv.date + 'T' + (inv.time || '00:00:00') + 'Z';
+    const sellerName = company.legalAr || company.legalEn || 'البائع';
+
+    let tlvData = '';
+    tlvData += tlv(1, sellerName);
+    tlvData += tlv(2, company.vat || '');
+    tlvData += tlv(3, timestamp);
+    tlvData += tlv(4, inv.total.toFixed(2));
+    tlvData += tlv(5, inv.vat.toFixed(2));
+    tlvData += tlv(6, inv.hash || '');
+    tlvData += tlv(7, 'DEMO_SIGNATURE_' + inv.uuid);
+    tlvData += tlv(8, 'DEMO_PUBLIC_KEY');
+    tlvData += tlv(9, 'DEMO_STAMP_SIGNATURE');
+
+    const bytes = new Uint8Array(tlvData.length);
+    for (let i = 0; i < tlvData.length; i++) bytes[i] = tlvData.charCodeAt(i) & 0xff;
+    return btoa(String.fromCharCode(...bytes));
+}
+
+// ==================== دالة تجزئة بسيطة ====================
+function computeSimpleHash(input) {
+    let hash = 0;
+    for (let i = 0; i < input.length; i++) {
+        const char = input.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return Math.abs(hash).toString(16).padStart(16, '0');
+}
+
+// ==================== إعدادات الهيئة ====================
 function loadZatca() {
     const z = DB.get('zatca', {});
     const c = DB.get('company', {});
     document.getElementById('zEnv').value = z.env || 'sandbox';
-    document.getElementById('zEgsUuid').value = z.egsUuid || 'Auto-generated on first submission';
-    document.getElementById('zVat').value = c.vat || 'Not set';
-    document.getElementById('zCsid').value = z.complianceCsid ? 'Configured (Sandbox)' : 'Not Configured';
+    document.getElementById('zEgsUuid').value = z.egsUuid || 'egs-' + Date.now();
+    document.getElementById('zVat').value = c.vat || 'غير مُحدّد';
+    document.getElementById('zCsid').value = z.complianceCsid ? 'مُعدّة (بيئة الاختبار)' :
+                                           z.prodCsid ? 'مُعدّة (الإنتاج)' : 'غير مُعدّة';
     document.getElementById('zCompliance').value = z.complianceCsid || '';
     document.getElementById('zSecret').value = z.complianceSecret || '';
+    document.getElementById('zProdCsid').value = z.prodCsid || '';
+    document.getElementById('zProdSecret').value = z.prodSecret || '';
+
+    if (!z.egsUuid) {
+        z.egsUuid = 'egs-' + Date.now();
+        DB.set('zatca', z);
+        document.getElementById('zEgsUuid').value = z.egsUuid;
+    }
 }
 
 function saveZatca() {
     const alertEl = document.getElementById('zatcaAlert');
-    const data = {
-        env: document.getElementById('zEnv').value,
-        egsUuid: document.getElementById('zEgsUuid').value.trim() || 'egs-' + Date.now(),
-        complianceCsid: document.getElementById('zCompliance').value.trim(),
-        complianceSecret: document.getElementById('zSecret').value.trim()
-    };
+    const data = DB.get('zatca', {});
+    data.env = document.getElementById('zEnv').value;
+    data.egsUuid = document.getElementById('zEgsUuid').value || ('egs-' + Date.now());
+    data.complianceCsid = document.getElementById('zCompliance').value.trim();
+    data.complianceSecret = document.getElementById('zSecret').value.trim();
+    data.prodCsid = document.getElementById('zProdCsid').value.trim();
+    data.prodSecret = document.getElementById('zProdSecret').value.trim();
+
     DB.set('zatca', data);
-    logAction('ZATCA_CONFIG_SAVED', 'Environment: ' + data.env);
-    alertEl.textContent = 'ZATCA configuration saved.';
+    logAction('ZATCA_CONFIG_SAVED', 'البيئة: ' + data.env);
+    alertEl.textContent = 'تم حفظ إعدادات الهيئة.';
     alertEl.className = 'alert-custom alert-success show';
     setTimeout(() => alertEl.className = 'alert-custom', 3000);
     loadZatca();
 }
 
-// ==================== LOGS ====================
+function runFakeSdkValidation() {
+    const el = document.getElementById('sdkResult');
+    const invoices = DB.get('invoices', []);
+    const withXml = invoices.filter(i => i.xml);
+    if (withXml.length === 0) {
+        el.textContent = 'لا توجد فواتير مع ملفات XML بعد. قم بتوليد XML أولاً.';
+        el.className = 'alert-custom alert-error show';
+        return;
+    }
+    el.innerHTML = `<strong>نتيجة التحقق بواسطة الأداة (محاكاة):</strong><br>
+        عدد الفواتير المُتحقّق منها: ${withXml.length}<br>
+        مخطط XSD: ناجح (محاكاة)<br>
+        صيغة TLV لرمز QR: ناجح (محاكاة)<br>
+        التوقيع: لم يتم التحقق (يتطلب شهادة حقيقية)<br>
+        <br>
+        <em>ملاحظة: هذه محاكاة تجريبية. التحقق الفعلي يتطلب تشغيل أداة ZATCA SDK الرسمية على الخادم.</em>`;
+    el.className = 'alert-custom alert-success show';
+    logAction('SDK_VALIDATION', `تم فحص ${withXml.length} فاتورة`);
+}
+
+function showSdkInfo() {
+    alert('تثبيت أداة الهيئة:\n\n' +
+        '1. حمّل الأداة من بوابة مطوري الهيئة\n' +
+        '2. استخرجها إلى C:\\zatca-sdk\\\n' +
+        '3. ثبّت Java 11 أو أحدث (مطلوب لتشغيل الأداة)\n' +
+        '4. شغّل: java -jar zatca-sdk.jar validate invoice.xml\n\n' +
+        'تتحقق الأداة من: مخطط XML (UBL 2.1)، صيغة TLV لرمز QR، والتوقيع الإلكتروني.');
+}
+
+// ==================== التسجيل الإلكتروني ====================
+function generateDemoCsr() {
+    const egsUuid = DB.get('zatca', {}).egsUuid || 'egs-' + Date.now();
+    alert('تم توليد CSR تجريبي:\n\n' +
+        'CN=EGS-' + egsUuid + '\n' +
+        'O=المنشأة التجريبية\n' +
+        'C=SA\n' +
+        'خوارزمية المفتاح: ECDSA secp256k1\n\n' +
+        'في النظام الفعلي، سيتم إرسال CSR إلى الهيئة مع رمز OTP للحصول على شهادة الامتثال.');
+    logAction('CSR_GENERATED', egsUuid);
+}
+
+function simulateCsidRequest() {
+    const otp = prompt('أدخل رمز OTP من بوابة فاتورة (بيئة الاختبار: 123456):', '123456');
+    if (!otp) return;
+
+    alert('محاكاة طلب الشهادة:\n\n' +
+        'رمز OTP: ' + otp + '\n' +
+        'نقطة النهاية: /compliance (بيئة الاختبار)\n\n' +
+        'في النظام الفعلي، سيتم إرسال CSR إلى الهيئة واستلام:\n' +
+        '- شهادة الامتثال (X.509)\n' +
+        '- السر الخاص بالشهادة\n' +
+        '- رمز الأمان الثنائي\n\n' +
+        'ثم يتم اجتياز 6 اختبارات امتثال قبل الانتقال إلى الإنتاج.');
+    logAction('CSID_REQUESTED', 'OTP: ' + otp.slice(0, 2) + '****');
+}
+
+// ==================== سجل العمليات ====================
 function renderLogs() {
     const logs = DB.get('logs', []);
     const tbody = document.getElementById('logsTable');
@@ -1653,19 +2178,25 @@ function renderLogs() {
 }
 
 function clearLogs() {
-    if (!confirm('Clear all logs?')) return;
+    if (!confirm('هل تريد مسح جميع السجلات؟')) return;
     DB.set('logs', []);
     renderLogs();
 }
 
-// ==================== UTIL ====================
+// ==================== أدوات مساعدة ====================
 function esc(s) {
     if (s === null || s === undefined) return '';
     return String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function escapeXml(s) {
+    if (s === null || s === undefined) return '';
+    return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
 }
 
 function refreshAll() {
@@ -1678,11 +2209,12 @@ function refreshAll() {
     loadZatca();
 }
 
-// ==================== INIT ====================
+// ==================== التهيئة ====================
 document.addEventListener('DOMContentLoaded', () => {
     customerModal = new bootstrap.Modal(document.getElementById('customerModal'));
     productModal = new bootstrap.Modal(document.getElementById('productModal'));
     invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
+    viewInvoiceModal = new bootstrap.Modal(document.getElementById('viewInvoiceModal'));
     pwModal = new bootstrap.Modal(document.getElementById('pwModal'));
 
     getUsers();
